@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My Task</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="topmenu">
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li>
+                    <a class="submenu-link">MASTER-DETAIL</a>
+                    <ul class="submenu">
+                        <li><a href="@Url.Action("Create", "Emp")">CreateEmp</a></li>
+                        <li><a href="@Url.Action("Index", "Emp")">Emps</a></li>
+                    </ul>
+                </li>
+                <li><a href="@Url.Action("Index", "Dept")">DEPARTMENTS</a></li>
+                <li>
+                    <a class="submenu-link">EMPS</a>
+                    <ul class="submenu">
+                        <li><a href="@Url.Action("GetEmpsAvgSal", "Emp")">EmpsAvgSal</a></li>
+                        <li><a href="@Url.Action("GetHierarchy", "Emp")">HierarchyEmps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My PAIN</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

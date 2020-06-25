@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TheTask.Models.DeptPL>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table border="1" width="100%" cellpadding="5">
+            <tr>
+                <th>DEPTNO</th>
+                <th>DNAME</th>
+                <th>LOC</th>
+            </tr>
+            @foreach (var depts in Model)
+            {
+                <tr>
+                    <td>@depts.DeptNo</td>
+                    <td>@depts.DeptName</td>
+                    <td>@depts.Loc</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
+
