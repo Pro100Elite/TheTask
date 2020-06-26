@@ -45,6 +45,7 @@
     <Compile Include="Interfaces\IEmpRepository.cs" />
     <Compile Include="Models\Dept.cs" />
     <Compile Include="Models\Emp.cs" />
+    <Compile Include="Models\HierarchyEmp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DeptRepository.cs" />
     <Compile Include="Repositories\EmpRepository.cs" />

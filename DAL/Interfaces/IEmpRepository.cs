@@ -10,6 +10,6 @@ namespace DAL.Interfaces
     public interface IEmpRepository
     {
         IEnumerable<Emp> GetAll();
-        IEnumerable<Emp> GetEmpsHierarchy();
+        IEnumerable<Emp> GetEmpsHierarchy(decimal? MgrNo);
     }
 }

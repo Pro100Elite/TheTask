@@ -29,9 +29,9 @@ namespace BL.Services
             return emps;
         }
 
-        public IEnumerable<EmpBL> GetEmpsHierarchy()
+        public IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo)
         {
-            var data = _repsitory.GetEmpsHierarchy();
+            var data = _repsitory.GetEmpsHierarchy(MgrNo);
             var emps = _mapper.Map<IEnumerable<EmpBL>>(data);
 
             return emps;

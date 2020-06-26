@@ -10,6 +10,6 @@ namespace BL.Interfaces
     public interface IEmpService
     {
         IEnumerable<EmpBL> GetAll();
-        IEnumerable<EmpBL> GetEmpsHierarchy();
+        IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo);
     }
 }

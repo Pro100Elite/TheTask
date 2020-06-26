@@ -30,9 +30,17 @@ namespace TheTask.Controllers
             return View(emps);
         }
 
+        public ActionResult GetSubordinates(decimal? MgrNo)
+        {
+            var data = _service.GetEmpsHierarchy(MgrNo);
+            var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
+
+            return PartialView("_Subordinates", emps);
+        }
+
         public ActionResult GetHierarchy()
         {
-            var data = _service.GetEmpsHierarchy();
+            var data = _service.GetEmpsHierarchy(null);
             var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
 
             return View(emps);

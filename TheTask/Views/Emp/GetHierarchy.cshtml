@@ -3,6 +3,7 @@
 <div>
     <table border="1" width="100%" cellpadding="5">
         <tr>
+            <th></th>
             <th>DEPTNO</th>
             <th>EMPNO</th>
             <th>ENAME</th>
@@ -12,21 +13,30 @@
             <th>MGR</th>
             <th>SAL</th>
         </tr>
-        @foreach (var emps in Model)
+        @foreach (var emp in Model)
         {
 
             <tr>
-
-                <td>@emps.DeptNo</td>
-                <td>@emps.EmpNo</td>
-                <td>@emps.EmpName</td>
-                <td>@emps.Comm</td>
-                <td>@emps.HireDate</td>
-                <td>@emps.Job</td>
-                <td>@emps.Mgr</td>
-                <td>@emps.Sal</td>
+                <td>
+                    @Ajax.ActionLink("+", "GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
+                             { HttpMethod = "GET", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace })
+                </td>
+                <td>@emp.DeptNo</td>
+                <td>@emp.EmpNo</td>
+                <td>@emp.EmpName</td>
+                <td>@emp.Comm</td>
+                <td>@emp.HireDate</td>
+                <td>@emp.Job</td>
+                <td>@emp.Mgr</td>
+                <td>@emp.Sal</td>
             </tr>
+            <tbody id="@emp.EmpNo">
+            </tbody>
         }
     </table>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+}
 

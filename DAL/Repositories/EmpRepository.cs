@@ -59,7 +59,7 @@ namespace DAL.Repositories
             return emps;
         }
 
-        public IEnumerable<Emp> GetEmpsHierarchy()
+        public IEnumerable<Emp> GetEmpsHierarchy(decimal? MgrNo)
         {
             var emps = new List<Emp>();
 
@@ -67,7 +67,17 @@ namespace DAL.Repositories
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = "sp_GetHierarchy";
+
+                if (MgrNo != null)
+                {
+                    cmd.CommandText = "sp_Subordinates";
+                    cmd.Parameters.AddWithValue("@MgrNo", MgrNo);
+                }
+                else
+                {
+                    cmd.CommandText = "sp_President";
+                }
+
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();

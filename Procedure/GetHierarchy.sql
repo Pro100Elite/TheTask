@@ -1,19 +1,5 @@
-CREATE PROCEDURE [dbo].[sp_GetHierarchy]
+CREATE PROCEDURE [dbo].[sp_Subordinates] @MgrNo decimal null
 AS
-WITH cteReports (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO ) AS
-(
-    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO
-    FROM EMP
-    WHERE MGR IS NULL
-
-    UNION ALL
-
-    SELECT e.EMPNO, e.ENAME, e.JOB, e.MGR, e.HIREDATE, e.SAL, e.COMM, e.DEPTNO
-    FROM EMP        AS e
-    INNER JOIN cteReports AS r ON e.MGR = r.EMPNO
-)
-
-SELECT
-    EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO
-FROM cteReports
+   SELECT * FROM EMP
+   WHERE MGR = @MgrNo
 GO

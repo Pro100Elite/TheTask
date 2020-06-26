@@ -1,0 +1,5 @@
+CREATE PROCEDURE [dbo].[sp_President]
+AS
+   SELECT * FROM EMP
+   WHERE MGR IS NULL
+GO
