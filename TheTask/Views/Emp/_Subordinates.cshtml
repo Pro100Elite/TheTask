@@ -1,24 +1,18 @@
 ﻿@model IEnumerable<TheTask.Models.EmpPL>
-
-<table border="1" width="100%" cellpadding="5">
     @foreach (var emp in Model)
     {
-        <tr>
-            <td>
+            <div class="child">
                 @Ajax.ActionLink("+", "GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
                          { HttpMethod = "GET", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace })
-            </td>
-            <td>@emp.DeptNo</td>
-            <td>@emp.EmpNo</td>
-            <td>@emp.EmpName</td>
-            <td>@emp.Comm</td>
-            <td>@emp.HireDate</td>
-            <td>@emp.Job</td>
-            <td>@emp.Mgr</td>
-            <td>@emp.Sal</td>
-        </tr>
-            <tr id="@emp.EmpNo">
-            </tr>
-
+            </div>
+            <div class="child">@emp.DeptNo</div>
+            <div class="child">@emp.EmpNo</div>
+            <div class="child">@emp.EmpName</div>
+            <div class="child">@emp.Comm</div>
+            <div class="child">@emp.HireDate</div>
+            <div class="child">@emp.Job</div>
+            <div class="child">@emp.Mgr</div>
+            <div class="child">@emp.Sal</div>
+            <div class="parent" id="@emp.EmpNo">
+            </div>
     }
-</table>

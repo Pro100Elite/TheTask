@@ -1,39 +1,34 @@
 ﻿@model IEnumerable<TheTask.Models.EmpPL>
 
-<div>
-    <table border="1" width="100%" cellpadding="5">
-        <tr>
-            <th></th>
-            <th>DEPTNO</th>
-            <th>EMPNO</th>
-            <th>ENAME</th>
-            <th>COMM</th>
-            <th>HIREDATE</th>
-            <th>JOB</th>
-            <th>MGR</th>
-            <th>SAL</th>
-        </tr>
-        @foreach (var emp in Model)
-        {
+<div class="parent">
+    <div class="child"></div>
+    <div class="child">DEPTNO</div>
+    <div class="child">EMPNO</div>
+    <div class="child">ENAME</div>
+    <div class="child">COMM</div>
+    <div class="child">HIREDATE</div>
+    <div class="child">JOB</div>
+    <div class="child">MGR</div>
+    <div class="child">SAL</div>
+</div>
 
-            <tr>
-                <td>
-                    @Ajax.ActionLink("+", "GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
-                             { HttpMethod = "GET", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace })
-                </td>
-                <td>@emp.DeptNo</td>
-                <td>@emp.EmpNo</td>
-                <td>@emp.EmpName</td>
-                <td>@emp.Comm</td>
-                <td>@emp.HireDate</td>
-                <td>@emp.Job</td>
-                <td>@emp.Mgr</td>
-                <td>@emp.Sal</td>
-            </tr>
-            <tbody id="@emp.EmpNo">
-            </tbody>
-        }
-    </table>
+<div class="parent">
+    @foreach (var emp in Model)
+    {
+<div class="child">
+    @Ajax.ActionLink("+", "GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
+    { HttpMethod = "GET", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace })
+</div>
+                <div class="child">@emp.DeptNo</div>
+                                <div class="child">@emp.EmpNo</div>
+                                                <div class="child">@emp.EmpName</div>
+                                                                <div class="child">@emp.Comm</div>
+                                                                                <div class="child">@emp.HireDate</div>
+                                                                                                <div class="child">@emp.Job</div>
+                                                                                                                <div class="child">@emp.Mgr</div>
+                                                                                                                                <div class="child">@emp.Sal</div>
+                                                                                                                                                <div class="parent" id="@emp.EmpNo">
+                                                                                                                                                </div>}
 </div>
 
 @section Scripts {

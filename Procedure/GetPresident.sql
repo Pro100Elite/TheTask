@@ -1,3 +1,4 @@
+USE TheTaskDb2;
 CREATE PROCEDURE [dbo].[sp_President]
 AS
    SELECT * FROM EMP

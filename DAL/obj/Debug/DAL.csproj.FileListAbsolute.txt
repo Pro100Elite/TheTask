@@ -3,3 +3,9 @@ I:\project\Projects\TheTask\DAL\bin\Debug\DAL.pdb
 I:\project\Projects\TheTask\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 I:\project\Projects\TheTask\DAL\obj\Debug\DAL.dll
 I:\project\Projects\TheTask\DAL\obj\Debug\DAL.pdb
+D:\Projects\TheTask\TheTask\DAL\bin\Debug\DAL.dll
+D:\Projects\TheTask\TheTask\DAL\bin\Debug\DAL.pdb
+D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.dll
+D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.pdb
