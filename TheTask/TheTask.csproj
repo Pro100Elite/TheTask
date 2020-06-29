@@ -148,6 +148,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DeptPL.cs" />
+    <Compile Include="Models\EmpCreatePL.cs" />
     <Compile Include="Models\EmpPL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -192,6 +193,7 @@
     <Content Include="Views\Emp\Index.cshtml" />
     <Content Include="Views\Emp\GetHierarchy.cshtml" />
     <Content Include="Views\Emp\_Subordinates.cshtml" />
+    <Content Include="Views\Emp\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

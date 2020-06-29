@@ -11,5 +11,6 @@ namespace DAL.Interfaces
     {
         IEnumerable<Emp> GetAll();
         IEnumerable<Emp> GetEmpsHierarchy(decimal? MgrNo);
+        void Create(Emp emp);
     }
 }

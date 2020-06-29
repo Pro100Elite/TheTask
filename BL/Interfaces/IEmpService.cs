@@ -11,5 +11,6 @@ namespace BL.Interfaces
     {
         IEnumerable<EmpBL> GetAll();
         IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo);
+        void Create(EmpBL emp);
     }
 }

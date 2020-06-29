@@ -105,5 +105,31 @@ namespace DAL.Repositories
 
             return emps;
         }
+
+        public void Create(Emp emp)
+        {
+            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            {
+                connection.Open();
+
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = "sp_AddEmp";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@EMPNO", emp.EmpNo);
+                cmd.Parameters.AddWithValue("@ENAME", emp.EmpName);
+                cmd.Parameters.AddWithValue("@JOB", emp.Job);
+                cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
+                cmd.Parameters.AddWithValue("@HIREDATE", emp.HireDate);
+                cmd.Parameters.AddWithValue("@SAL", emp.Sal);
+                cmd.Parameters.AddWithValue("@COMM", emp.Comm);
+                cmd.Parameters.AddWithValue("@DEPTNO", emp.DeptNo);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Delete(decimal? empNo)
+        {
+            //sp_DeleteEmp
+        }
     }
 }

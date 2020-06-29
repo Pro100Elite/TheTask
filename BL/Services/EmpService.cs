@@ -2,6 +2,7 @@
 using BL.Interfaces;
 using BL.Models;
 using DAL.Interfaces;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,13 @@ namespace BL.Services
             var emps = _mapper.Map<IEnumerable<EmpBL>>(data);
 
             return emps;
+        }
+
+        public void Create(EmpBL empBl)
+        {
+            var emp = _mapper.Map<Emp>(empBl);
+
+            _repsitory.Create(emp);
         }
     }
 }

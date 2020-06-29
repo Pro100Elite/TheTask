@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BL.Interfaces;
+using BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ namespace TheTask.Controllers
     {
 
         private readonly IEmpService _service;
+        private readonly IDeptService _deptService;
         private readonly IMapper _mapper;
 
-        public EmpController(IEmpService service, IMapper mapper)
+        public EmpController(IEmpService service, IDeptService deptService, IMapper mapper)
         {
             _service = service;
+            _deptService = deptService;
             _mapper = mapper;
         }
 
@@ -55,23 +58,26 @@ namespace TheTask.Controllers
         // GET: Emp/Create
         public ActionResult Create()
         {
-            return View();
+            var depts = _deptService.GetAll();
+            var mgr = _service.GetAll();
+
+            var Depts = new SelectList(depts, "DeptNo", "DeptName");
+            var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
+            var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
+            var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job };
+
+            return View(model);
         }
 
         // POST: Emp/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(EmpCreatePL empPL)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            var model = _mapper.Map<EmpBL>(empPL);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _service.Create(model);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Emp/Edit/5
