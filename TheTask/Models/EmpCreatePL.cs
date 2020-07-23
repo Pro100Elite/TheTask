@@ -21,8 +21,6 @@ namespace TheTask.Models
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
         public decimal? DeptNo { get; set; }
-        //public string DEPTNAME { get; set; }
-        //public int SALGRADE { get; set; }
 
         public IEnumerable<SelectListItem> ListDept { get; set; }
         public IEnumerable<SelectListItem> ListMgr { get; set; }

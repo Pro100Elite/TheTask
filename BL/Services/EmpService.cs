@@ -30,6 +30,22 @@ namespace BL.Services
             return emps;
         }
 
+        public IEnumerable<EmpBL> GetDeptAvgSal()
+        {
+            var data = _repsitory.GetDeptAvgSal();
+            var emps = _mapper.Map<IEnumerable<EmpBL>>(data);
+
+            return emps;
+        }
+
+        public EmpBL GetEmp(decimal? empNo)
+        {
+            var data = _repsitory.GetEmp(empNo);
+            var emp = _mapper.Map<EmpBL>(data);
+
+            return emp;
+        }
+
         public IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo)
         {
             var data = _repsitory.GetEmpsHierarchy(MgrNo);
@@ -43,6 +59,18 @@ namespace BL.Services
             var emp = _mapper.Map<Emp>(empBl);
 
             _repsitory.Create(emp);
+        }
+
+        public void Delete(decimal? empNo)
+        {
+            _repsitory.Delete(empNo);
+        }
+
+        public void Edit(EmpBL empBl)
+        {
+            var emp = _mapper.Map<Emp>(empBl);
+
+            _repsitory.Edit(emp);
         }
     }
 }

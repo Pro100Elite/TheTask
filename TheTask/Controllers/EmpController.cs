@@ -24,11 +24,18 @@ namespace TheTask.Controllers
             _mapper = mapper;
         }
 
-        // GET: Emp
         public ActionResult Index()
         {
             var data = _service.GetAll();
             var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
+
+            return View(emps);
+        }
+
+        public ActionResult GetHierarchyAvgDept()
+        {
+            var data = _service.GetDeptAvgSal();
+            var emps = _mapper.Map<IEnumerable<EmpPL>>(data).GroupBy(x => x.DeptNo);
 
             return View(emps);
         }
@@ -49,13 +56,7 @@ namespace TheTask.Controllers
             return View(emps);
         }
 
-        // GET: Emp/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Emp/Create
         public ActionResult Create()
         {
             var depts = _deptService.GetAll();
@@ -69,7 +70,6 @@ namespace TheTask.Controllers
             return View(model);
         }
 
-        // POST: Emp/Create
         [HttpPost]
         public ActionResult Create(EmpCreatePL empPL)
         {
@@ -80,48 +80,40 @@ namespace TheTask.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Emp/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(decimal empNo)
         {
-            return View();
+            var depts = _deptService.GetAll();
+            var mgr = _service.GetAll();
+
+            var Depts = new SelectList(depts, "DeptNo", "DeptName");
+            var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
+            var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
+            var data = _service.GetEmp(empNo);
+            var model = _mapper.Map<EmpCreatePL>(data);
+
+            model.ListDept = Depts;
+            model.ListJob = Job;
+            model.ListMgr = Mgr;
+
+            return View(model);
         }
 
-        // POST: Emp/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EmpCreatePL empPL)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var model = _mapper.Map<EmpBL>(empPL);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _service.Edit(model);
+
+            return RedirectToAction("Index");
         }
 
-        // GET: Emp/Delete/5
-        public ActionResult Delete(int id)
+        [HttpDelete]
+        public ActionResult Delete(decimal empNo)
         {
-            return View();
-        }
+            _service.Delete(empNo);
 
-        // POST: Emp/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return new EmptyResult();
         }
     }
 }

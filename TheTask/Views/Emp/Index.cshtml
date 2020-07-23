@@ -15,18 +15,27 @@
         @foreach (var emps in Model)
         {
 
-            <tr>
-
-                <td>@emps.DeptNo</td>
-                <td>@emps.EmpNo</td>
-                <td>@emps.EmpName</td>
-                <td>@emps.Comm</td>
-                <td>@emps.HireDate</td>
-                <td>@emps.Job</td>
-                <td>@emps.Mgr</td>
-                <td>@emps.Sal</td>
-            </tr>
-        }
+<tr id="@emps.EmpNo">
+    <td>@emps.DeptNo</td>
+    <td>@emps.EmpNo</td>
+    <td>@emps.EmpName</td>
+    <td>@emps.Comm</td>
+    <td>@emps.HireDate</td>
+    <td>@emps.Job</td>
+    <td>@emps.Mgr</td>
+    <td>@emps.Sal</td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { empNo = emps.EmpNo })
+    </td>
+    <td>
+        @Ajax.ActionLink("Delete", "Delete", new { empNo = emps.EmpNo }, new AjaxOptions
+        { HttpMethod = "DELETE", UpdateTargetId = emps.EmpNo.ToString(), InsertionMode = InsertionMode.Replace })
+    </td>
+</tr>}
     </table>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+}
 

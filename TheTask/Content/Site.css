@@ -143,13 +143,21 @@ ul {
 
 
 .parent {
-    border: 1px solid #D5B45B;
-    background-color: #273037;    
+/*    border: 1px solid #D5B45B;*/
+    background-color: #273037;
     color: white;
 }
 
 .child {
     display: inline-block;
     height: 50px;
-    width: 100px
+    width: 100px;
+}
+
+.parent:empty {
+    border: none;
+}
+
+.parent:not( :empty ) {
+    border: 1px solid #D5B45B;
 }

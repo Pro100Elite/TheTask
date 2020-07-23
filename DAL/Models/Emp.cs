@@ -16,7 +16,5 @@ namespace DAL.Models
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
         public decimal? DeptNo { get; set; }
-
-        //public virtual Dept DEPT { get; set; }
     }
 }

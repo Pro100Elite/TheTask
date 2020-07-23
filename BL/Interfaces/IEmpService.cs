@@ -9,8 +9,12 @@ namespace BL.Interfaces
 {
     public interface IEmpService
     {
+        EmpBL GetEmp(decimal? empNo);
         IEnumerable<EmpBL> GetAll();
+        IEnumerable<EmpBL> GetDeptAvgSal();
         IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo);
         void Create(EmpBL emp);
+        void Delete(decimal? empNo);
+        void Edit(EmpBL empBl);
     }
 }

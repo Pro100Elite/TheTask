@@ -13,8 +13,6 @@ namespace DAL.Repositories
     public class DeptRepository: IDeptRepository
     {
         private SqlConnectionStringBuilder sqlConnectionString = new SqlConnectionStringBuilder();
-        //string connectionString = @"Data Source =.\SQLEXPRESS; Initial Catalog = TheTaskDb2; Integrated Security = True";
-
         public DeptRepository()
         {
             sqlConnectionString.DataSource = @".\SQLEXPRESS";
