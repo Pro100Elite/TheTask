@@ -15,21 +15,21 @@
 <div class="parent">
     @foreach (var emp in Model)
     {
-<div class="child">
-    @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
-    { HttpMethod = "GET", OnSuccess = "OnSuccess", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
-    {       
-<input type="submit" value="+" class="btn" />}
-</div>
-                <div class="child">@emp.DeptNo</div>
-                                <div class="child">@emp.EmpNo</div>
-                                                <div class="child">@emp.EmpName</div>
-                                                                <div class="child">@emp.Comm</div>
-                                                                                <div class="child">@emp.HireDate</div>
-                                                                                                <div class="child">@emp.Job</div>
-                                                                                                                <div class="child">@emp.Mgr</div>
-                                                                                                                                <div class="child">@emp.Sal</div>
-                                                                                                                                                <div class="parent" id="@emp.EmpNo"></div>}
+        <div class="child">
+            @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
+            { HttpMethod = "GET", OnSuccess = "OnSuccess", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
+            {
+                <input type="submit" value="+" class="btn"/>}
+        </div>
+        <div class="child">@emp.DeptNo</div>
+        <div class="child">@emp.EmpNo</div>
+        <div class="child">@emp.EmpName</div>
+        <div class="child">@emp.Comm</div>
+        <div class="child">@emp.HireDate</div>
+        <div class="child">@emp.Job</div>
+        <div class="child">@emp.Mgr</div>
+        <div class="child">@emp.Sal</div>
+        <div class="parent" id="@emp.EmpNo"></div>}
 </div>
 
 
@@ -37,34 +37,15 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
-<script>
-        //$(function () {
-        //    $(".parent").each(function (indx, el) {
-        //        $(el).has(".child").length || $(el).hide();
-
-        //    });
-        //});
-            function OnSuccess() {
-                $(this).replaceWith("<button>" + "-" + "</button>");
-                $("button").click(function () {
-                    //$(this).next(".child").css("background-color", "yellow");
-                    //var coll = document.getElementsByClassName("parent");
-                    //var i;
-
-                    //for (i = 0; i < coll.length; i++) {
-                    //    coll[i].addEventListener("click", function () {
-                    //        this.classList.toggle("active");
-                    //        var content = this.nextElementSibling;
-                    //        if (content.style.display === "block") {
-                    //            content.style.display = "none";
-                    //        } else {
-                    //            content.style.display = "block";
-                    //        }                           
-                    //    });
-                    //}
-                    alert("Свернулось сюка");
-                });
+    <script>
+        function OnSuccess() {
+            $(this).replaceWith("<button>" + "-" + "</button>");
         }
-</script>
+
+        $(document).on('click', "button", function () {
+            var parent = $(this).parent().parent();
+            parent.children().children().nextAll().toggle(500);
+        });
+    </script>
 }
 

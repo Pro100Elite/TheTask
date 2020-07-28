@@ -1,3 +1,4 @@
+USE TheTaskDb2;
 
 CREATE PROCEDURE [dbo].[sp_Hierarchy]
 AS

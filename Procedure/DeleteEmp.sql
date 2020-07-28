@@ -1,3 +1,5 @@
+USE TheTaskDb2
+
 CREATE PROCEDURE sp_DeleteEmp           
 (            
    @empNo decimal            

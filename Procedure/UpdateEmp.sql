@@ -1,3 +1,5 @@
+USE TheTaskDb2;
+
 CREATE PROCEDURE sp_UpdateEmp            
 (            
     @EMPNO DECIMAL(30),           
