@@ -14,7 +14,6 @@
         </tr>
         @foreach (var emps in Model)
         {
-
 <tr id="@emps.EmpNo">
     <td>@emps.DeptNo</td>
     <td>@emps.EmpNo</td>
@@ -29,7 +28,9 @@
     </td>
     <td>
         @Ajax.ActionLink("Delete", "Delete", new { empNo = emps.EmpNo }, new AjaxOptions
-        { HttpMethod = "DELETE", UpdateTargetId = emps.EmpNo.ToString(), InsertionMode = InsertionMode.Replace })
+   { HttpMethod = "DELETE", UpdateTargetId = emps.EmpNo.ToString(), 
+       Confirm = $"\n Confirm deletion\n EmpNo = {emps.EmpNo}\n Name = {emps.EmpName}\n Job = {emps.Job}", 
+       InsertionMode = InsertionMode.Replace })
     </td>
 </tr>}
     </table>

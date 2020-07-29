@@ -2,6 +2,7 @@
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,25 +13,19 @@ namespace DAL.Repositories
 {
     public class DeptRepository: IDeptRepository
     {
-        private SqlConnectionStringBuilder sqlConnectionString = new SqlConnectionStringBuilder();
-        public DeptRepository()
-        {
-            sqlConnectionString.DataSource = @".\SQLEXPRESS";
-            sqlConnectionString.InitialCatalog = "TheTaskDb2";
-            sqlConnectionString.IntegratedSecurity = true;
-            sqlConnectionString.Pooling = true;
-        }
+        string connectionStr = ConfigurationManager.ConnectionStrings["TaskDb"].ConnectionString;
 
         public IEnumerable<Dept> GetAll()
         {
             var depts = new List<Dept>();
 
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = "SELECT * FROM DEPT;";
+                cmd.CommandText = "sp_GetDepts";
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();
 

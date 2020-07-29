@@ -11,14 +11,12 @@
     <div>
         <table border="1" width="100%" cellpadding="5">
             <tr>
-                <th>DEPTNO</th>
                 <th>DNAME</th>
                 <th>LOC</th>
             </tr>
             @foreach (var depts in Model)
             {
                 <tr>
-                    <td>@depts.DeptNo</td>
                     <td>@depts.DeptName</td>
                     <td>@depts.Loc</td>
                 </tr>

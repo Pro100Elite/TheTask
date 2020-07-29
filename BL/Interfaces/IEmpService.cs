@@ -11,7 +11,7 @@ namespace BL.Interfaces
     {
         EmpBL GetEmp(decimal? empNo);
         IEnumerable<EmpBL> GetAll();
-        IEnumerable<EmpBL> GetDeptAvgSal();
+        IEnumerable<EmpBL> GetHierarchy();
         IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo);
         void Create(EmpBL emp);
         void Delete(decimal? empNo);

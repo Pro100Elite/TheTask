@@ -1,6 +1,0 @@
-USE TheTaskDb2;
-
-CREATE PROCEDURE [dbo].[sp_GetEmp]
-AS
-    SELECT * FROM EMP 
-GO

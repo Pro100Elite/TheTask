@@ -30,9 +30,9 @@ namespace BL.Services
             return emps;
         }
 
-        public IEnumerable<EmpBL> GetDeptAvgSal()
+        public IEnumerable<EmpBL> GetHierarchy()
         {
-            var data = _repsitory.GetDeptAvgSal();
+            var data = _repsitory.GetHierarchy();
             var emps = _mapper.Map<IEnumerable<EmpBL>>(data);
 
             return emps;

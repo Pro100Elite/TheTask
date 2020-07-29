@@ -16,6 +16,7 @@ namespace TheTask.Models
         public string Job { get; set; }
         public decimal? Mgr { get; set; }
         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Select Date")]
         public DateTime? HireDate { get; set; }
         [Required(ErrorMessage = "Input SAL")]
         public decimal? Sal { get; set; }

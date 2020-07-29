@@ -64,3 +64,101 @@ INSERT INTO SALGRADE VALUES (2,1201,1400);
 INSERT INTO SALGRADE VALUES (3,1401,2000);
 INSERT INTO SALGRADE VALUES (4,2001,3000);
 INSERT INTO SALGRADE VALUES (5,3001,9999);
+
+CREATE PROCEDURE sp_AddEmp        
+(          
+    @EMPNO DECIMAL(30),           
+    @ENAME VARCHAR(10),          
+    @JOB VARCHAR(9),          
+    @MGR DECIMAL(4),  
+    @HIREDATE DATE,          
+    @SAL DECIMAL(7,2),          
+    @COMM DECIMAL(7,2),          
+    @DEPTNO DECIMAL(30)         
+)          
+AS           
+BEGIN           
+    INSERT INTO EMP (EMPNO,ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)           
+    VALUES (@EMPNO,@ENAME,@JOB, @MGR,@HIREDATE, @SAL, @COMM, @DEPTNO)
+END  
+
+CREATE PROCEDURE sp_DeleteEmp           
+(            
+   @empNo decimal            
+)            
+AS             
+BEGIN            
+   DELETE FROM EMP WHERE EMPNO= @empNo            
+END  
+
+CREATE PROCEDURE [dbo].[sp_GetEmps]
+AS
+    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP 
+GO
+
+CREATE PROCEDURE [dbo].[sp_GetEmpById] @empNo decimal           
+AS             
+    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP
+	WHERE EMPNO = @empNo
+GO
+
+CREATE PROCEDURE [dbo].[sp_Subordinates] @MgrNo decimal null
+AS
+   SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP
+   WHERE MGR = @MgrNo
+GO
+
+CREATE PROCEDURE [dbo].[sp_President]
+AS
+   SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP
+   WHERE MGR IS NULL
+GO
+
+CREATE PROCEDURE [dbo].[sp_Hierarchy]
+AS
+  WITH cteReports (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO ) AS
+(
+    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO
+    FROM EMP
+    WHERE MGR IS NULL
+
+    UNION ALL
+
+    SELECT e.EMPNO, e.ENAME, e.JOB, e.MGR, e.HIREDATE, e.SAL, e.COMM, e.DEPTNO
+    FROM EMP        AS e
+    INNER JOIN cteReports AS r ON e.MGR = r.EMPNO
+)
+SELECT
+    EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO
+FROM cteReports 
+GO
+
+CREATE PROCEDURE sp_UpdateEmp            
+(            
+    @EMPNO DECIMAL(30),           
+    @ENAME VARCHAR(10),          
+    @JOB VARCHAR(9),          
+    @MGR DECIMAL(4),  
+    @HIREDATE DATE,          
+    @SAL DECIMAL(7,2),          
+    @COMM DECIMAL(7,2),          
+    @DEPTNO DECIMAL(30)             
+)            
+AS           
+BEGIN            
+   UPDATE EMP             
+   SET EMPNO=@EMPNO,            
+   ENAME=@ENAME,            
+   JOB=@JOB,          
+   MGR=@MGR,   
+   HIREDATE=@HIREDATE,            
+   SAL=@SAL,            
+   COMM=@COMM,            
+   DEPTNO=@DEPTNO            
+   WHERE EMPNO=@EMPNO            
+END
+
+CREATE PROCEDURE [dbo].[sp_GetDepts]           
+AS             
+    SELECT DEPTNO, DNAME, LOC FROM DEPT
+GO

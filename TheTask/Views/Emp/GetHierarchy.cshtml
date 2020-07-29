@@ -43,8 +43,12 @@
         }
 
         $(document).on('click', "button", function () {
-            var parent = $(this).parent().parent();
-            parent.children().children().nextAll().toggle(500);
+            //var parent = $(this).parent().parent();
+            var parent = $(this).parent().nextAll();
+            var gg = $(parent).attr('id');
+            //alert(gg);
+            //$('#' + gg).nextAll().toggle(500);
+            parent.toggle(500);
         });
     </script>
 }

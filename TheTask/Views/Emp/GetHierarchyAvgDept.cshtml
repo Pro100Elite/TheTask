@@ -4,12 +4,10 @@
     <table border="1" width="100%" cellpadding="5">
         <tr>
             <th>DEPTNO</th>
-            <th>EMPNO</th>
             <th>ENAME</th>
             <th>COMM</th>
             <th>HIREDATE</th>
             <th>JOB</th>
-            <th>MGR</th>
             <th>SAL</th>
         </tr>
         @foreach (var dept in Model)
@@ -17,14 +15,12 @@
             decimal? avgSal = 0;
             foreach (var emps in dept)
             {
-    <tr id="@emps.">
+    <tr>
         <td>@emps.DeptNo</td>
-        <td>@emps.EmpNo</td>
         <td>@emps.EmpName</td>
         <td>@emps.Comm</td>
         <td>@emps.HireDate</td>
         <td>@emps.Job</td>
-        <td>@emps.Mgr</td>
         <td>@emps.Sal</td>
     </tr>
             avgSal += emps.Sal;

@@ -2,7 +2,9 @@
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,27 +13,19 @@ namespace DAL.Repositories
 {
     public class EmpRepository : IEmpRepository
     {
-        private SqlConnectionStringBuilder sqlConnectionString = new SqlConnectionStringBuilder();
-
-        public EmpRepository()
-        {
-            sqlConnectionString.DataSource = @".\SQLEXPRESS";
-            sqlConnectionString.InitialCatalog = "TheTaskDb2";
-            sqlConnectionString.IntegratedSecurity = true;
-            sqlConnectionString.Pooling = true;
-        }
+        string connectionStr = ConfigurationManager.ConnectionStrings["TaskDb"].ConnectionString;
 
         public IEnumerable<Emp> GetAll()
         {
             var emps = new List<Emp>();
 
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = "sp_GetEmp";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "sp_GetEmps";
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();
 
@@ -59,17 +53,17 @@ namespace DAL.Repositories
             return emps;
         }
 
-        public IEnumerable<Emp> GetDeptAvgSal()
+        public IEnumerable<Emp> GetHierarchy()
         {
             var emps = new List<Emp>();
 
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "sp_Hierarchy";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();
 
@@ -100,14 +94,17 @@ namespace DAL.Repositories
         {
             Emp emp = new Emp();
 
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = "SELECT* FROM Emp WHERE EMPNO = " + empNo;
+                cmd.CommandText = "sp_GetEmpById";
+                cmd.Parameters.AddWithValue("@empNo", empNo);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();
+
                 while (reader.Read())
                 {
                     emp.EmpNo = (decimal)reader["EMPNO"];
@@ -127,7 +124,7 @@ namespace DAL.Repositories
         {
             var emps = new List<Emp>();
 
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
@@ -142,7 +139,7 @@ namespace DAL.Repositories
                     cmd.CommandText = "sp_President";
                 }
 
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();
 
@@ -172,13 +169,14 @@ namespace DAL.Repositories
 
         public void Create(Emp emp)
         {
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "sp_AddEmp";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@EMPNO", emp.EmpNo);
                 cmd.Parameters.AddWithValue("@ENAME", emp.EmpName);
                 cmd.Parameters.AddWithValue("@JOB", emp.Job);
@@ -187,19 +185,20 @@ namespace DAL.Repositories
                 cmd.Parameters.AddWithValue("@SAL", emp.Sal);
                 cmd.Parameters.AddWithValue("@COMM", emp.Comm);
                 cmd.Parameters.AddWithValue("@DEPTNO", emp.DeptNo);
+
                 cmd.ExecuteNonQuery();
             }
         }
 
         public void Delete(decimal? empNo)
         {
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "sp_DeleteEmp";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@empNo", empNo);
                 cmd.ExecuteNonQuery();
             }
@@ -207,13 +206,14 @@ namespace DAL.Repositories
 
         public void Edit(Emp emp)
         {
-            using (SqlConnection connection = new SqlConnection(sqlConnectionString.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "sp_UpdateEmp";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@EMPNO", emp.EmpNo);
                 cmd.Parameters.AddWithValue("@ENAME", emp.EmpName);
                 cmd.Parameters.AddWithValue("@JOB", emp.Job);
@@ -222,6 +222,7 @@ namespace DAL.Repositories
                 cmd.Parameters.AddWithValue("@SAL", emp.Sal);
                 cmd.Parameters.AddWithValue("@COMM", emp.Comm);
                 cmd.Parameters.AddWithValue("@DEPTNO", emp.DeptNo);
+
                 cmd.ExecuteNonQuery();
             }
         }

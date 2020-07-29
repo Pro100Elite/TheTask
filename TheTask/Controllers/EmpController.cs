@@ -34,7 +34,7 @@ namespace TheTask.Controllers
 
         public ActionResult GetHierarchyAvgDept()
         {
-            var data = _service.GetDeptAvgSal();
+            var data = _service.GetHierarchy();
             var emps = _mapper.Map<IEnumerable<EmpPL>>(data).GroupBy(x => x.DeptNo);
 
             return View(emps);
