@@ -1,5 +1,16 @@
 ﻿@model IEnumerable<TheTask.Models.EmpPL>
 
+
+<head>
+    <style>
+        .btn {
+            width: 50px;
+            height: 50px;
+            color: #273037;
+            background-color: #D5B45B;
+        }
+    </style>
+</head>
 <div class="parent">
     <div class="child"></div>
     <div class="child">DEPTNO</div>
@@ -39,16 +50,20 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
     <script>
         function OnSuccess() {
-            $(this).replaceWith("<button>" + "-" + "</button>");
+            $(this).replaceWith("<button class='btn'>" + "-" + "</button>");
         }
 
         $(document).on('click', "button", function () {
-            //var parent = $(this).parent().parent();
+
             var parent = $(this).parent().nextAll();
-            var gg = $(parent).attr('id');
-            //alert(gg);
-            //$('#' + gg).nextAll().toggle(500);
-            parent.toggle(500);
+            var btn = $(this).text();
+            if (btn != "+") {
+                parent.hide(500);
+                $(this).text("+");
+            } else {
+                parent.show(500);
+                $(this).text("-");
+            }
         });
     </script>
 }

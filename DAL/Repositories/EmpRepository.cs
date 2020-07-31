@@ -183,7 +183,15 @@ namespace DAL.Repositories
                 cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
                 cmd.Parameters.AddWithValue("@HIREDATE", emp.HireDate);
                 cmd.Parameters.AddWithValue("@SAL", emp.Sal);
-                cmd.Parameters.AddWithValue("@COMM", emp.Comm);
+
+                if (emp.Comm != null)
+                {
+                    cmd.Parameters.AddWithValue("@COMM", emp.Comm);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@COMM", DBNull.Value);
+                }
                 cmd.Parameters.AddWithValue("@DEPTNO", emp.DeptNo);
 
                 cmd.ExecuteNonQuery();
@@ -220,7 +228,15 @@ namespace DAL.Repositories
                 cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
                 cmd.Parameters.AddWithValue("@HIREDATE", emp.HireDate);
                 cmd.Parameters.AddWithValue("@SAL", emp.Sal);
-                cmd.Parameters.AddWithValue("@COMM", emp.Comm);
+
+                if (emp.Comm != null)
+                {
+                    cmd.Parameters.AddWithValue("@COMM", emp.Comm);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@COMM", DBNull.Value);
+                }
                 cmd.Parameters.AddWithValue("@DEPTNO", emp.DeptNo);
 
                 cmd.ExecuteNonQuery();
