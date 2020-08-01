@@ -28,9 +28,9 @@
     {
         <div class="child">
             @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
-            { HttpMethod = "GET", OnSuccess = "OnSuccess", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
+            { HttpMethod = "GET", OnSuccess = "AnimateVoteMessage('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
             {
-                <input type="submit" value="+" class="btn"/>}
+                <input type="submit" value="+" class="btn" id="Replace-@emp.EmpNo" />}
         </div>
         <div class="child">@emp.DeptNo</div>
         <div class="child">@emp.EmpNo</div>
@@ -48,23 +48,27 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
-    <script>
-        function OnSuccess() {
-            $(this).replaceWith("<button class='btn'>" + "-" + "</button>");
+<script>
+        function AnimateVoteMessage(empNo) {
+            var btn = document.createElement('button');
+            btn.setAttribute('class', "btn");
+            btn.setAttribute('id', empNo);
+            $(btn).text("-");
+
+            $('#Replace-' + empNo).parent().replaceWith(btn);
         }
 
         $(document).on('click', "button", function () {
-
-            var parent = $(this).parent().nextAll();
+            var id = $(this).attr('id');
+            alert(id);
             var btn = $(this).text();
             if (btn != "+") {
-                parent.hide(500);
+                $("[id = '" + id + "'][class = parent]").hide(500);
                 $(this).text("+");
             } else {
-                parent.show(500);
+                $("[id = '" + id + "'][class = parent]").show(500);
                 $(this).text("-");
             }
         });
-    </script>
+</script>
 }
-
