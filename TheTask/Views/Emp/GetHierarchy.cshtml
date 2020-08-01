@@ -21,26 +21,26 @@
     <div class="child">JOB</div>
     <div class="child">MGR</div>
     <div class="child">SAL</div>
-</div>
 
-<div class="parent">
-    @foreach (var emp in Model)
-    {
-        <div class="child">
-            @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
-            { HttpMethod = "GET", OnSuccess = "AnimateVoteMessage('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
-            {
-                <input type="submit" value="+" class="btn" id="Replace-@emp.EmpNo" />}
-        </div>
-        <div class="child">@emp.DeptNo</div>
-        <div class="child">@emp.EmpNo</div>
-        <div class="child">@emp.EmpName</div>
-        <div class="child">@emp.Comm</div>
-        <div class="child">@emp.HireDate</div>
-        <div class="child">@emp.Job</div>
-        <div class="child">@emp.Mgr</div>
-        <div class="child">@emp.Sal</div>
-        <div class="parent" id="@emp.EmpNo"></div>}
+    <div class="parent">
+        @foreach (var emp in Model)
+        {
+            <div class="child">
+                @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
+                { HttpMethod = "GET", OnSuccess = "AnimateVoteMessage('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
+                {
+                    <input type="submit" value="+" class="btn" id="Replace-@emp.EmpNo" />}
+            </div>
+            <div class="child">@emp.DeptNo</div>
+            <div class="child">@emp.EmpNo</div>
+            <div class="child">@emp.EmpName</div>
+            <div class="child">@emp.Comm</div>
+            <div class="child">@emp.HireDate</div>
+            <div class="child">@emp.Job</div>
+            <div class="child">@emp.Mgr</div>
+            <div class="child">@emp.Sal</div>
+            <div class="parent" id="@emp.EmpNo"></div>}
+    </div>
 </div>
 
 
@@ -60,13 +60,12 @@
 
         $(document).on('click', "button", function () {
             var id = $(this).attr('id');
-            alert(id);
             var btn = $(this).text();
             if (btn != "+") {
-                $("[id = '" + id + "'][class = parent]").hide(500);
+                $("[id = '" + id + "'][class = parent]").hide(300);
                 $(this).text("+");
             } else {
-                $("[id = '" + id + "'][class = parent]").show(500);
+                $("[id = '" + id + "'][class = parent]").show(300);
                 $(this).text("-");
             }
         });

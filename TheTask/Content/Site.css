@@ -143,9 +143,9 @@ ul {
 
 
 .parent {
-    /*    border: 1px solid #D5B45B;*/
     background-color: #273037;
     color: white;
+    width:950px;
 }
 
 .child {
@@ -155,9 +155,10 @@ ul {
 }
 
 .parent:empty {
-    border: none;
+    display:none;
 }
 
 .parent:not( :empty ) {
     border: 1px solid #D5B45B;
+    border-style:double;
 }
