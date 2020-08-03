@@ -3,6 +3,7 @@ using BL.Interfaces;
 using BL.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -114,6 +115,22 @@ namespace TheTask.Controllers
             _service.Delete(empNo);
 
             return new EmptyResult();
+        }
+
+
+        public JsonResult CheckEmpNo(decimal? empNo)
+        {
+            var data = _service.GetEmp(empNo);
+            if (data.EmpNo == 0)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            string error = String.Format(CultureInfo.InvariantCulture,
+                "{0} is not available.", empNo);
+
+            return Json(error, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

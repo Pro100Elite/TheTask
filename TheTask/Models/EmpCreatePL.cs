@@ -11,6 +11,7 @@ namespace TheTask.Models
     public class EmpCreatePL
     {
         [Required(ErrorMessage = "Input EMPNO")]
+        [Remote("CheckEmpNo","Emp")]
         public decimal EmpNo { get; set; }
         [Required(ErrorMessage = "Input ENAME")]
         public string EmpName { get; set; }
