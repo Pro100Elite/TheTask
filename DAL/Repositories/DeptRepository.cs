@@ -24,6 +24,7 @@ namespace DAL.Repositories
                 connection.Open();
 
                 var cmd = connection.CreateCommand();
+
                 cmd.CommandText = "sp_GetDepts";
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -45,6 +46,24 @@ namespace DAL.Repositories
             }
 
             return depts;
+        }
+
+        public void Create(Dept dept)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                connection.Open();
+
+                var cmd = connection.CreateCommand();
+
+                cmd.CommandText = "sp_AddDept";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@DNAME", dept.DeptName);
+                cmd.Parameters.AddWithValue("@LOC", dept.Loc);
+
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

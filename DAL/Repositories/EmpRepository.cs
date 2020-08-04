@@ -176,8 +176,7 @@ namespace DAL.Repositories
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "sp_AddEmp";
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@EMPNO", emp.EmpNo);
+          
                 cmd.Parameters.AddWithValue("@ENAME", emp.EmpName);
                 cmd.Parameters.AddWithValue("@JOB", emp.Job);
                 cmd.Parameters.AddWithValue("@MGR", emp.Mgr);

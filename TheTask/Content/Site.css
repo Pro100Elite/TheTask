@@ -124,7 +124,7 @@ div {
 }
 
 th, div {
-    border-bottom:none;
+    border-bottom: none;
 }
 
 tr:hover {
@@ -145,7 +145,7 @@ ul {
 .parent {
     background-color: #273037;
     color: white;
-    width:750px;
+    width: 750px;
 }
 
 .child {
@@ -155,10 +155,24 @@ ul {
 }
 
 .parent:empty {
-    display:none;
+    display: none;
 }
 
 .parent:not( :empty ) {
     border: 1px solid #D5B45B;
-    border-style:double;
+    border-style: double;
+}
+
+.btn {
+    background-color: #273037;
+    color: white;
+}
+
+    .btn:hover {
+        color: #D5B45B;
+    }
+
+.btn-default:hover {
+    background-color: #D5B45B;
+    color: #273037;
 }

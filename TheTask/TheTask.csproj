@@ -196,6 +196,7 @@
     <Content Include="Views\Emp\Create.cshtml" />
     <Content Include="Views\Emp\Edit.cshtml" />
     <Content Include="Views\Emp\GetHierarchyAvgDept.cshtml" />
+    <Content Include="Views\Dept\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

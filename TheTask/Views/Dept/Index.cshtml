@@ -9,6 +9,8 @@
 </head>
 <body>
     <div>
+        <a class="btn" href="@Url.Action("Create", "Dept")">CreateEmp</a>
+        <wbr />
         <table border="1" width="100%" cellpadding="5">
             <tr>
                 <th>DNAME</th>
@@ -16,11 +18,10 @@
             </tr>
             @foreach (var depts in Model)
             {
-                <tr>
-                    <td>@depts.DeptName</td>
-                    <td>@depts.Loc</td>
-                </tr>
-            }
+<tr>
+    <td>@depts.DeptName</td>
+    <td>@depts.Loc</td>
+</tr>            }
         </table>
     </div>
 </body>

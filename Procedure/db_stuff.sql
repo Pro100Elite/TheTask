@@ -66,8 +66,7 @@ INSERT INTO SALGRADE VALUES (4,2001,3000);
 INSERT INTO SALGRADE VALUES (5,3001,9999);
 
 CREATE PROCEDURE sp_AddEmp        
-(          
-    @EMPNO DECIMAL(30),           
+(                   
     @ENAME VARCHAR(10),          
     @JOB VARCHAR(9),          
     @MGR DECIMAL(4),  
@@ -79,7 +78,7 @@ CREATE PROCEDURE sp_AddEmp
 AS           
 BEGIN           
     INSERT INTO EMP (EMPNO,ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)           
-    VALUES (@EMPNO,@ENAME,@JOB, @MGR,@HIREDATE, @SAL, @COMM, @DEPTNO)
+    VALUES ((SELECT MAX(EMPNO)+1 FROM EMP),@ENAME,@JOB, @MGR,@HIREDATE, @SAL, @COMM, @DEPTNO)
 END  
 
 CREATE PROCEDURE sp_DeleteEmp           
@@ -166,3 +165,14 @@ CREATE PROCEDURE [dbo].[sp_GetDepts]
 AS             
     SELECT DEPTNO, DNAME, LOC FROM DEPT
 GO
+
+CREATE PROCEDURE sp_AddDept        
+(                     
+    @DNAME VARCHAR(14),          
+    @LOC VARCHAR(13)                    
+)          
+AS           
+BEGIN
+    INSERT INTO DEPT (DEPTNO, DNAME, LOC)           
+    VALUES ((SELECT MAX(DEPTNO)+1 FROM DEPT),@DNAME,@LOC)
+END  

@@ -2,6 +2,7 @@
 using BL.Interfaces;
 using BL.Models;
 using DAL.Interfaces;
+using DAL.Models;
 using DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,13 @@ namespace BL.Services
             var depts = _mapper.Map<IEnumerable<DeptBL>>(data);
             
             return depts;
+        }
+
+        public void Create(DeptBL deptBl)
+        {
+            var dept = _mapper.Map<Dept>(deptBl);
+
+            _repsitory.Create(dept);
         }
     }
 }

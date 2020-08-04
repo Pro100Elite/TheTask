@@ -10,5 +10,6 @@ namespace DAL.Interfaces
     public interface IDeptRepository
     {
         IEnumerable<Dept> GetAll();
+        void Create(Dept dept);
     }
 }
