@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TheTask.Models.EmpPL>
+﻿@model IEnumerable<TheTask.Models.EmpPlusSalGradePL>
 
 
 <head>
@@ -11,44 +11,46 @@
         }
     </style>
 </head>
-<div class="parent">
-    <div class="child"></div>
-    <div class="child">DEPTNO</div>
-    <div class="child">EMPNO</div>
-    <div class="child">ENAME</div>
-    <div class="child">COMM</div>
-    <div class="child">HIREDATE</div>
-    <div class="child">JOB</div>
-    <div class="child">MGR</div>
-    <div class="child">SAL</div>
-
+<body>
     <div class="parent">
-        @foreach (var emp in Model)
-        {
-            <div class="child">
-                @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
-                { HttpMethod = "GET", OnSuccess = "AnimateVoteMessage('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
-                {
-                    <input type="submit" value="+" class="btn" id="Replace-@emp.EmpNo" />}
-            </div>
-            <div class="child">@emp.DeptNo</div>
-            <div class="child">@emp.EmpNo</div>
-            <div class="child">@emp.EmpName</div>
-            <div class="child">@emp.Comm</div>
-            <div class="child">@emp.HireDate.Value.Month/@emp.HireDate.Value.Day/@emp.HireDate.Value.Year</div>
-            <div class="child">@emp.Job</div>
-            <div class="child">@emp.Mgr</div>
-            <div class="child">@emp.Sal</div>
-            <div class="parent" id="@emp.EmpNo"></div>}
+        <div class="child"></div>
+        @*<div class="child">DEPTNO</div>
+            <div class="child">EMPNO</div>*@
+        <div class="child">ENAME</div>
+        <div class="child">COMM</div>
+        <div class="child">HIREDATE</div>
+        <div class="child">JOB</div>
+        <div class="child">SAL</div>
+        <div class="child">GRADE</div>
+
+        <div class="parent">
+            @foreach (var emp in Model)
+            {
+                <div class="child">
+                    @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
+                    { HttpMethod = "GET", OnSuccess = "AnimateVoteMessage('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
+                    {
+                        <input type="submit" value="+" class="btn" id="Replace-@emp.EmpNo" />}
+                </div>
+                @*<div class="child">@emp.DeptNo</div>
+                    <div class="child">@emp.EmpNo</div>*@
+                <div class="child">@emp.EmpName</div>
+                <div class="child">@emp.Comm</div>
+                <div class="child">@emp.HireDate.Value.Month/@emp.HireDate.Value.Day/@emp.HireDate.Value.Year</div>
+                <div class="child">@emp.Job</div>
+                <div class="child">@emp.Sal</div>
+                <div class="child">@emp.Grade</div>
+                <div class="parent" id="@emp.EmpNo"></div>}
+        </div>
     </div>
-</div>
+</body>
 
 
 
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
-<script>
+    <script>
         function AnimateVoteMessage(empNo) {
             var btn = document.createElement('button');
             btn.setAttribute('class', "btn");
@@ -69,5 +71,5 @@
                 $(this).text("-");
             }
         });
-</script>
+    </script>
 }

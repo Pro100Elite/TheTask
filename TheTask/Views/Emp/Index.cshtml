@@ -4,13 +4,10 @@
         <input class="form-control" type="text" placeholder="Search..." id="search-text" onkeyup="tableSearch()" style="width:250px">
         <table border="1" width="100%" cellpadding="5" id="info-table">
             <tr>
-                <th>DEPTNO</th>
-                <th>EMPNO</th>
                 <th>ENAME</th>
                 <th>COMM</th>
                 <th>HIREDATE</th>
                 <th>JOB</th>
-                <th>MGR</th>
                 <th>SAL</th>
                 <th></th>
                 <th></th>
@@ -18,13 +15,10 @@
             @foreach (var emps in Model)
             {
     <tr id="@emps.EmpNo">
-        <td>@emps.DeptNo</td>
-        <td>@emps.EmpNo</td>
         <td>@emps.EmpName</td>
         <td>@emps.Comm</td>
         <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
         <td>@emps.Job</td>
-        <td>@emps.Mgr</td>
         <td>@emps.Sal</td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { empNo = emps.EmpNo })
@@ -34,7 +28,7 @@
             {
                 HttpMethod = "DELETE",
                 UpdateTargetId = emps.EmpNo.ToString(),
-                Confirm = $"\n Confirm deletion\n EmpNo = {emps.EmpNo}\n Name = {emps.EmpName}\n Job = {emps.Job}",
+                Confirm = $"\n Confirm deletion\n\n Name = {emps.EmpName}\n Job = {emps.Job}",
                 InsertionMode = InsertionMode.Replace
             })
         </td>

@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IEmpService.cs" />
     <Compile Include="Models\DeptBL.cs" />
     <Compile Include="Models\EmpBL.cs" />
+    <Compile Include="Models\EmpPlusSalGradeBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DeptService.cs" />
     <Compile Include="Services\EmpService.cs" />

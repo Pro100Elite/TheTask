@@ -11,7 +11,6 @@ namespace BL.Models
         public decimal DeptNo { get; set; }
         public string DeptName { get; set; }
         public string Loc { get; set; }
-
-        //public ICollection<EmpBL> EMPs { get; set; }
+        public ICollection<EmpBL> _Emps { get; set; }
     }
 }

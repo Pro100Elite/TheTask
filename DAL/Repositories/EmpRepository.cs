@@ -28,7 +28,6 @@ namespace DAL.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 var reader = cmd.ExecuteReader();
-
                 if (reader.HasRows)
 
                 {
@@ -120,9 +119,9 @@ namespace DAL.Repositories
             return emp;
         }
 
-        public IEnumerable<Emp> GetEmpsHierarchy(decimal? MgrNo)
+        public IEnumerable<EmpPlusSalGrade> GetEmpsHierarchy(decimal? MgrNo)
         {
-            var emps = new List<Emp>();
+            var emps = new List<EmpPlusSalGrade>();
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
@@ -148,7 +147,7 @@ namespace DAL.Repositories
                 {
                     while (reader.Read())
                     {
-                        var emp = new Emp
+                        var emp = new EmpPlusSalGrade
                         {
                             EmpNo = (decimal)reader["EMPNO"],
                             EmpName = (string)reader["ENAME"],
@@ -157,7 +156,8 @@ namespace DAL.Repositories
                             HireDate = reader["HIREDATE"] as DateTime?,
                             Sal = reader["SAL"] as decimal?,
                             Comm = reader["COMM"] as decimal?,
-                            DeptNo = reader["DEPTNO"] as decimal?
+                            DeptNo = reader["DEPTNO"] as decimal?,
+                            Grade = (int)reader["GRADE"]
                         };
                         emps.Add(emp);
                     }

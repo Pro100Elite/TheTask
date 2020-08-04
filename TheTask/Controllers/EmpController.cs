@@ -44,7 +44,7 @@ namespace TheTask.Controllers
         public ActionResult GetSubordinates(decimal? MgrNo)
         {
             var data = _service.GetEmpsHierarchy(MgrNo);
-            var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
+            var emps = _mapper.Map<IEnumerable<EmpPlusSalGradePL>>(data);
 
             return PartialView("_Subordinates", emps);
         }
@@ -52,7 +52,7 @@ namespace TheTask.Controllers
         public ActionResult GetHierarchy()
         {
             var data = _service.GetEmpsHierarchy(null);
-            var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
+            var emps = _mapper.Map<IEnumerable<EmpPlusSalGradePL>>(data);
 
             return View(emps);
         }

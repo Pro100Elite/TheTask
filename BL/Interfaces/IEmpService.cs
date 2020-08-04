@@ -12,7 +12,7 @@ namespace BL.Interfaces
         EmpBL GetEmp(decimal? empNo);
         IEnumerable<EmpBL> GetAll();
         IEnumerable<EmpBL> GetHierarchy();
-        IEnumerable<EmpBL> GetEmpsHierarchy(decimal? MgrNo);
+        IEnumerable<EmpPlusSalGradeBL> GetEmpsHierarchy(decimal? MgrNo);
         void Create(EmpBL emp);
         void Delete(decimal? empNo);
         void Edit(EmpBL empBl);

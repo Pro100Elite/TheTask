@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class Emp
+    public class EmpPlusSalGrade
     {
         public decimal EmpNo { get; set; }
         public string EmpName { get; set; }
@@ -18,6 +18,7 @@ namespace DAL.Models
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
         public decimal? DeptNo { get; set; }
+        public int Grade { get; set; }
 
         private EntityRef<Dept> _Dept;
         [Association(Storage = "_Dept", ThisKey = "DeptNo")]

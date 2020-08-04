@@ -12,7 +12,7 @@ namespace DAL.Interfaces
         Emp GetEmp(decimal? empNo);
         IEnumerable<Emp> GetAll();
         IEnumerable<Emp> GetHierarchy();
-        IEnumerable<Emp> GetEmpsHierarchy(decimal? MgrNo);
+        IEnumerable<EmpPlusSalGrade> GetEmpsHierarchy(decimal? MgrNo);
         void Create(Emp emp);
         void Delete(decimal? empNo);
         void Edit(Emp emp);

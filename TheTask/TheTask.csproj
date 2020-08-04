@@ -150,6 +150,7 @@
     <Compile Include="Models\DeptPL.cs" />
     <Compile Include="Models\EmpCreatePL.cs" />
     <Compile Include="Models\EmpPL.cs" />
+    <Compile Include="Models\EmpPlusSalGradePL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
