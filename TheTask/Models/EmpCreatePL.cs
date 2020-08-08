@@ -10,8 +10,6 @@ namespace TheTask.Models
 {
     public class EmpCreatePL
     {
-        //[Required(ErrorMessage = "Input EMPNO")]
-        //[Remote("CheckEmpNo","Emp")]
         public decimal EmpNo { get; set; }
         [Required(ErrorMessage = "Input ENAME")]
         public string EmpName { get; set; }
@@ -21,7 +19,7 @@ namespace TheTask.Models
         [Required(ErrorMessage = "Select Date")]
         public DateTime? HireDate { get; set; }
         [Required(ErrorMessage = "Input SAL")]
-        [Range(700,9999, ErrorMessage ="Min Sal = 700, Max Sal = 9999")]
+        [Range(700, 9999, ErrorMessage = "Min Sal = 700, Max Sal = 9999")]
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
         public decimal? DeptNo { get; set; }

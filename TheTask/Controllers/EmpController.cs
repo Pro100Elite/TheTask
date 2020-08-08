@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BL.Interfaces;
 using BL.Models;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -76,9 +77,65 @@ namespace TheTask.Controllers
         {
             var model = _mapper.Map<EmpBL>(empPL);
 
-            _service.Create(model);
+            if (string.IsNullOrEmpty(empPL.EmpName))
+            {
+                ModelState.AddModelError("EmpName", "ne corect Name");
+            }
+            else
+            {
+                var data2 = _service.GetAll().Where(e => e.EmpName == empPL.EmpName);
+                var targetEmp = _service.GetEmp(empPL.EmpNo);
 
-            return RedirectToAction("Index");
+                if (data2.Count() != 0)
+                {
+                    ModelState.AddModelError("EmpName", "ne corect Name2");
+                }
+            }
+
+            if (string.IsNullOrEmpty(empPL.Job))
+            {
+                ModelState.AddModelError("Job", "Select Job");
+            }
+
+            if (string.IsNullOrEmpty(empPL.HireDate.ToString()))
+            {
+                ModelState.AddModelError("HireDate", "Select HireDate");
+            }
+
+            if (string.IsNullOrEmpty(empPL.Sal.ToString()))
+            {
+                ModelState.AddModelError("Sal", "ne corect Sal");
+            }
+            else if (empPL.Sal < 700 || empPL.Sal > 9999)
+            {
+                ModelState.AddModelError("Sal", "ne corect Sal2");
+            }
+
+            if (string.IsNullOrEmpty(empPL.DeptNo.ToString()))
+            {
+                ModelState.AddModelError("DeptNo", "Select Dept");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _service.Create(model);
+
+                return RedirectToAction("Index");
+            }
+
+            var depts = _deptService.GetAll();
+            var mgr = _service.GetAll();
+
+            var Depts = new SelectList(depts, "DeptNo", "DeptName");
+            var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
+            var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
+            var data = _service.GetEmp(empPL.EmpNo);
+
+            empPL.ListDept = Depts;
+            empPL.ListJob = Job;
+            empPL.ListMgr = Mgr;
+
+            return View(empPL);
         }
 
         public ActionResult Edit(decimal empNo)
@@ -104,9 +161,64 @@ namespace TheTask.Controllers
         {
             var model = _mapper.Map<EmpBL>(empPL);
 
-            _service.Edit(model);
+            if (string.IsNullOrEmpty(empPL.EmpName))
+            {
+                ModelState.AddModelError("EmpName", "ne corect Name");
+            }
+            else
+            {
+                var data2 = _service.GetAll().Where(e => e.EmpName == empPL.EmpName);
+                var targetEmp = _service.GetEmp(empPL.EmpNo);
 
-            return RedirectToAction("Index");
+                if (data2.Count() != 0 & targetEmp.EmpName != empPL.EmpName)
+                {
+                    ModelState.AddModelError("EmpName", "ne corect Name2");
+                }
+            }
+
+            if (string.IsNullOrEmpty(empPL.Job))
+            {
+                ModelState.AddModelError("Job", "Select Job");
+            }
+
+            if (string.IsNullOrEmpty(empPL.HireDate.ToString()))
+            {
+                ModelState.AddModelError("HireDate", "Select HireDate");
+            }
+
+            if (string.IsNullOrEmpty(empPL.Sal.ToString()))
+            {
+                ModelState.AddModelError("Sal", "ne corect Sal");
+            } else if (empPL.Sal < 700 || empPL.Sal > 9999)
+            {
+                ModelState.AddModelError("Sal", "ne corect Sal2");
+            }
+
+            if (string.IsNullOrEmpty(empPL.DeptNo.ToString()))
+            {
+                ModelState.AddModelError("DeptNo", "Select Dept");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _service.Edit(model);
+
+                return RedirectToAction("Index");
+            }
+
+            var depts = _deptService.GetAll();
+            var mgr = _service.GetAll();
+
+            var Depts = new SelectList(depts, "DeptNo", "DeptName");
+            var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
+            var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
+            var data = _service.GetEmp(empPL.EmpNo);
+
+            empPL.ListDept = Depts;
+            empPL.ListJob = Job;
+            empPL.ListMgr = Mgr;
+
+            return View(empPL);
         }
 
         [HttpDelete]
@@ -115,22 +227,6 @@ namespace TheTask.Controllers
             _service.Delete(empNo);
 
             return new EmptyResult();
-        }
-
-
-        public JsonResult CheckEmpNo(decimal? empNo)
-        {
-            var data = _service.GetEmp(empNo);
-            if (data.EmpNo == 0)
-            {
-                return Json(true, JsonRequestBehavior.AllowGet);
-            }
-
-            string error = String.Format(CultureInfo.InvariantCulture,
-                "{0} is not available.", empNo);
-
-            return Json(error, JsonRequestBehavior.AllowGet);
-
         }
     }
 }

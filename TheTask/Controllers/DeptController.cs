@@ -48,68 +48,83 @@ namespace TheTask.Controllers
         {
             var model = _mapper.Map<DeptBL>(deptPL);
 
-            _service.Create(model);
-
-            return RedirectToAction("Index");
-        }
-
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            if (string.IsNullOrEmpty(deptPL.DeptName))
             {
-           
+                ModelState.AddModelError("DeptName", "ne corect DeptName");
+            }
+            else
+            {
+                var data = _service.GetAll().Where(d => d.DeptName == deptPL.DeptName);
+
+                if (data.Count() != 0)
+                {
+                    ModelState.AddModelError("DeptName", "ne corect DeptName2");
+                }
+            }
+            if (string.IsNullOrEmpty(deptPL.Loc))
+            {
+                ModelState.AddModelError("Loc", "ne corect Loc");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _service.Create(model);
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(deptPL);
         }
 
 
-        public ActionResult Delete(int id)
+        public ActionResult Edit(decimal deptNo)
         {
-            return View();
-        }
+            var data = _service.GetDept(deptNo);
+            var model = _mapper.Map<DeptPL>(data);
 
+            return View(model);
+        }
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Edit(DeptPL deptPL)
         {
-            try
-            {
+            var model = _mapper.Map<DeptBL>(deptPL);
 
+            if (string.IsNullOrEmpty(deptPL.DeptName))
+            {
+                ModelState.AddModelError("DeptName", "ne corect DeptName");
+            } else
+            {
+                var data = _service.GetAll().Where(d => d.DeptName == deptPL.DeptName);
+                var targetDept = _service.GetDept(deptPL.DeptNo);
+
+                if (data.Count() != 0 & targetDept.DeptName != deptPL.DeptName)
+                {
+                    ModelState.AddModelError("DeptName", "ne corect DeptName2");
+                }
+            }
+            if (string.IsNullOrEmpty(deptPL.Loc))
+            {
+                ModelState.AddModelError("Loc", "ne corect Loc");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _service.Edit(model);
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(deptPL);
         }
 
-        public JsonResult CheckDeptName(string deptName)
+
+        [HttpDelete]
+        public ActionResult Delete(decimal deptNo)
         {
-            var data = _service.GetAll().Where(d => d.DeptName == deptName);
-            if (data.Count() == 0)
-            {
-                return Json(true, JsonRequestBehavior.AllowGet);
-            }
+            _service.Delete(deptNo);
 
-            string error = String.Format(CultureInfo.InvariantCulture,
-                "{0} is not available.", deptName);
-
-            return Json(error, JsonRequestBehavior.AllowGet);
-
+            return new EmptyResult();
         }
     }
 }

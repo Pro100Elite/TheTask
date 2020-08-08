@@ -10,6 +10,9 @@ namespace BL.Interfaces
     public interface IDeptService
     {
         IEnumerable<DeptBL> GetAll();
+        DeptBL GetDept(decimal deptNo);
         void Create(DeptBL deptBl);
+        void Edit(DeptBL deptBl);
+        void Delete(decimal deptNo);
     }
 }

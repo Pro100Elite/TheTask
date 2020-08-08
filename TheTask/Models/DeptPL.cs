@@ -11,7 +11,6 @@ namespace TheTask.Models
     {
         public decimal DeptNo { get; set; }
         [Required(ErrorMessage = "Input Name")]
-        [Remote("CheckDeptName", "Dept")]
         public string DeptName { get; set; }
         [Required(ErrorMessage = "Input Loc")]
         public string Loc { get; set; }

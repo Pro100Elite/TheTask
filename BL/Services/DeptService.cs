@@ -31,11 +31,31 @@ namespace BL.Services
             return depts;
         }
 
+        public DeptBL GetDept(decimal deptNo)
+        {
+            var data = _repsitory.GetDept(deptNo);
+            var dept = _mapper.Map<DeptBL>(data);
+
+            return dept;
+        }
+
         public void Create(DeptBL deptBl)
         {
             var dept = _mapper.Map<Dept>(deptBl);
 
             _repsitory.Create(dept);
+        }
+
+        public void Edit(DeptBL deptBl)
+        {
+            var dept = _mapper.Map<Dept>(deptBl);
+
+            _repsitory.Edit(dept);
+        }
+
+        public void Delete(decimal deptNo)
+        {
+            _repsitory.Delete(deptNo);
         }
     }
 }

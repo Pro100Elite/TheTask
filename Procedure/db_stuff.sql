@@ -166,6 +166,13 @@ AS
     SELECT DEPTNO, DNAME, LOC FROM DEPT
 GO
 
+CREATE PROCEDURE [dbo].[sp_GetDeptById] @deptNo decimal           
+AS             
+    SELECT DEPTNO, DNAME, LOC FROM DEPT
+	WHERE DEPTNO = @deptNo
+GO
+
+
 CREATE PROCEDURE sp_AddDept        
 (                     
     @DNAME VARCHAR(14),          
@@ -175,4 +182,29 @@ AS
 BEGIN
     INSERT INTO DEPT (DEPTNO, DNAME, LOC)           
     VALUES ((SELECT MAX(DEPTNO)+1 FROM DEPT),@DNAME,@LOC)
-END  
+END 
+
+CREATE PROCEDURE sp_DeleteDept           
+(            
+   @deptNo decimal           
+)            
+AS             
+BEGIN            
+   DELETE FROM DEPT WHERE DEPTNO= @deptNo         
+END 
+
+CREATE PROCEDURE sp_UpdateDept            
+(                         
+    @DEPTNO DECIMAL(30),
+	@DNAME VARCHAR(14),
+	@LOC VARCHAR(13)
+)            
+AS           
+BEGIN            
+   UPDATE DEPT             
+   SET 
+   DEPTNO=@DEPTNO,            
+   DNAME=@DNAME,            
+   LOC=@LOC                   
+   WHERE DEPTNO=@DEPTNO            
+END
