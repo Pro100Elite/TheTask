@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<TheTask.Models.DeptPL>
 
 <div>
-    <a class="btn" href="@Url.Action("Create", "Dept")">CreateEmp</a>
-    <wbr />
+    <input type="text" id="search" placeholder="Search...">
+    <a class="btn" href="@Url.Action("Create", "Dept")">Create</a>
     <table border="1" width="100%" cellpadding="5">
         <tr>
             <th>DNAME</th>
@@ -12,25 +12,47 @@
         </tr>
         @foreach (var depts in Model)
         {
-    <tr id="@depts.DeptNo">
-        <td>@depts.DeptName</td>
-        <td>@depts.Loc</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { deptNo = depts.DeptNo })
-        </td>
-        <td>
-            @Ajax.ActionLink("Delete", "Delete", new { deptNo = depts.DeptNo }, new AjaxOptions
-            {
-                HttpMethod = "DELETE",
-                UpdateTargetId = depts.DeptNo.ToString(),
-                Confirm = $"\n Confirm deletion\n\n Name = {depts.DeptName}\n Loc = {depts.Loc}",
-                InsertionMode = InsertionMode.Replace
-            })
-        </td>
-    </tr>}
+<tr id="@depts.DeptNo">
+    <td id="DeptName">@depts.DeptName</td>
+    <td>@depts.Loc</td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { deptNo = depts.DeptNo })
+    </td>
+    <td>
+        @Ajax.ActionLink("Delete", "Delete", new { deptNo = depts.DeptNo }, new AjaxOptions
+        {
+            HttpMethod = "DELETE",
+            UpdateTargetId = depts.DeptNo.ToString(),
+            Confirm = $"\n Confirm deletion\n\n Name = {depts.DeptName}\n Loc = {depts.Loc}",
+            InsertionMode = InsertionMode.Replace
+        })
+    </td>
+</tr>}
     </table>
 </div>
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+
+    <script>
+        $("#search").on("keyup", function () {
+            var value = $(this).val();
+
+            $("table tr").each(function (index) {
+                if (index !== 0) {
+
+                    $row = $(this);
+
+                    var id = $row.find("#DeptName").text();
+
+                    if (id.indexOf(value) !== 0) {
+                        $row.hide();
+                    }
+                    else {
+                        $row.show();
+                    }
+                }
+            });
+        });
+    </script>
 }
 

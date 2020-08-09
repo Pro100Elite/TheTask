@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TheTask.Models.DeptPL>
+
+    <body>
+        <div class="split left">
+            <div>
+                <h4>DEPARTMENTS:</h4>
+                <input type="text" id="searchDept" placeholder="Search...">
+            </div>
+            <table border="1" width="100%" cellpadding="5" id="Dept">
+                <tr>
+                    <th>DNAME</th>
+                    <th>LOC</th>
+                    <th></th>
+                </tr>
+                @foreach (var depts in Model)
+                {
+                    <tr>
+                        <td id="DeptName">@depts.DeptName</td>
+                        <td>@depts.Loc</td>
+                        <td>
+                            @Ajax.ActionLink("Detail", "DetailData", new { deptNo = depts.DeptNo }, new AjaxOptions
+                            { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "AnimateVoteMessage('" + depts.DeptName + "')", InsertionMode = InsertionMode.Replace })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="split right" id="rp">
+        </div>
+    </body>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+
+    <script>
+        $("#searchDept").on("keyup", function () {
+            var value = $(this).val();
+
+            $("#Dept tr").each(function (index) {
+                if (index !== 0) {
+
+                    $row = $(this);
+
+                    var id = $row.find("#DeptName").text();
+
+                    if (id.indexOf(value) !== 0) {
+                        $row.hide();
+                    }
+                    else {
+                        $row.show();
+                    }
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        function AnimateVoteMessage(deptName) {
+            $("#dName").text('Department Selected: ' + deptName +'');
+            $("#searchEmp").on("keyup", function () {
+                var value = $(this).val();
+
+                $("#Emp tr").each(function (index) {
+                    if (index !== 0) {
+
+                        $row = $(this);
+
+                        var id = $row.find("#EName").text();
+
+                        if (id.indexOf(value) !== 0) {
+                            $row.hide();
+                        }
+                        else {
+                            $row.show();
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

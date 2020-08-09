@@ -144,6 +144,7 @@
     <Compile Include="Controllers\DeptController.cs" />
     <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasterDetailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -198,6 +199,9 @@
     <Content Include="Views\Emp\GetHierarchyAvgDept.cshtml" />
     <Content Include="Views\Dept\Create.cshtml" />
     <Content Include="Views\Dept\Edit.cshtml" />
+    <Content Include="Views\MasterDetail\MasterDet.cshtml" />
+    <Content Include="Views\MasterDetail\_Dept.cshtml" />
+    <Content Include="Views\MasterDetail\_Emps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

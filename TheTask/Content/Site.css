@@ -104,12 +104,19 @@ table {
 }
 
 th {
+    width: 200px;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 10px;
+    padding-left: 5px;
     border: none;
     background-color: #D5B45B;
     color: black;
+    text-align: center;
+}
+
+td {
+    width: 200px;
+    text-align:center;
 }
 
 tr {
@@ -175,4 +182,29 @@ ul {
 .btn-default:hover {
     background-color: #D5B45B;
     color: #273037;
+}
+
+/*......*/
+.split {
+    position: fixed;
+    z-index: 1;
+    overflow-x: scroll;
+}
+
+.left {
+    height: 80%;
+    width: 30%;
+    padding-top: 20px;
+    border: groove;
+    border-right-color: #D5B45B;
+    left: 0;
+}
+
+.right {
+    height: 80%;
+    width: 69%;
+    padding-top: 20px;
+    border: groove;
+    border-left-color: #273037;
+    right: 0;
 }

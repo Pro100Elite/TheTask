@@ -52,6 +52,44 @@ namespace DAL.Repositories
             return emps;
         }
 
+        public IEnumerable<Emp> GetByDept(decimal deptNo)
+        {
+            var emps = new List<Emp>();
+
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                connection.Open();
+
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = "sp_GetEmpsByDept";
+                cmd.Parameters.AddWithValue("@deptNo", deptNo);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+
+                {
+                    while (reader.Read())
+                    {
+                        var emp = new Emp
+                        {
+                            EmpNo = (decimal)reader["EMPNO"],
+                            EmpName = (string)reader["ENAME"],
+                            Job = reader["JOB"] as string,
+                            Mgr = reader["MGR"] as decimal?,
+                            HireDate = reader["HIREDATE"] as DateTime?,
+                            Sal = reader["SAL"] as decimal?,
+                            Comm = reader["COMM"] as decimal?,
+                            DeptNo = reader["DEPTNO"] as decimal?
+                        };
+                        emps.Add(emp);
+                    }
+                }
+            }
+
+            return emps;
+        }
+
         public IEnumerable<Emp> GetHierarchy()
         {
             var emps = new List<Emp>();

@@ -9,6 +9,7 @@
             <th>HIREDATE</th>
             <th>JOB</th>
             <th>SAL</th>
+            <th>AVG</th>
         </tr>
         @foreach (var dept in Model)
         {
@@ -26,9 +27,18 @@
             avgSal += emps.Sal;
                     }
     <tr>
-        <th>AVG</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
         <td>@string.Format("{0:0.00}", (avgSal / dept.Count()))</td>
-    </tr>}
+    </tr>
+    <tr>
+
+    </tr>
+    }
     </table>
 </div>
 

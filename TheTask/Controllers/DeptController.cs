@@ -31,7 +31,6 @@ namespace TheTask.Controllers
             return View(depts);
         }
 
-
         public ActionResult Details(int id)
         {
             return View();

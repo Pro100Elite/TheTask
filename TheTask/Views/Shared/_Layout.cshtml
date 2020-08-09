@@ -16,7 +16,7 @@
                     <a class="submenu-link">MASTER-DETAIL</a>
                     <ul class="submenu">
                         <li><a href="@Url.Action("Create", "Emp")">CreateEmp</a></li>
-                        <li><a href="@Url.Action("Index", "Emp")">Emps</a></li>
+                        <li><a href="@Url.Action("MasterDet", "MasterDetail")">MS</a></li>
                     </ul>
                 </li>
                 <li><a href="@Url.Action("Index", "Dept")">DEPARTMENTS</a></li>
@@ -32,10 +32,6 @@
     </header>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My project</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

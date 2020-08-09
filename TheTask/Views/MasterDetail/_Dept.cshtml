@@ -1,0 +1,17 @@
+﻿@model IEnumerable<TheTask.Models.DeptPL>
+
+<div>
+    <table border="1" width="100%" cellpadding="5">
+        <tr>
+            <th>DNAME</th>
+            <th>LOC</th>
+        </tr>
+        @foreach (var depts in Model)
+        {
+<tr id="@depts.DeptNo">
+    <td>@depts.DeptName</td>
+    <td>@depts.Loc</td>
+</tr>
+}
+    </table>
+</div>

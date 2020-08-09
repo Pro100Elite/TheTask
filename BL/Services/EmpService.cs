@@ -30,6 +30,14 @@ namespace BL.Services
             return emps;
         }
 
+        public IEnumerable<EmpBL> GetByDept(decimal deptNo)
+        {
+            var data = _repsitory.GetByDept(deptNo);
+            var emps = _mapper.Map<IEnumerable<EmpBL>>(data);
+
+            return emps;
+        }
+
         public IEnumerable<EmpBL> GetHierarchy()
         {
             var data = _repsitory.GetHierarchy();
