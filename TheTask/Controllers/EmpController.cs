@@ -120,7 +120,7 @@ namespace TheTask.Controllers
             {
                 _service.Create(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MasterDet", "MasterDetail");
             }
 
             var depts = _deptService.GetAll();
@@ -202,8 +202,7 @@ namespace TheTask.Controllers
             if (ModelState.IsValid)
             {
                 _service.Edit(model);
-
-                return RedirectToAction("Index");
+                return RedirectToAction("MasterDet", "MasterDetail");
             }
 
             var depts = _deptService.GetAll();

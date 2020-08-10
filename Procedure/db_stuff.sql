@@ -65,7 +65,7 @@ INSERT INTO SALGRADE VALUES (3,1401,2000);
 INSERT INTO SALGRADE VALUES (4,2001,3000);
 INSERT INTO SALGRADE VALUES (5,3001,9999);
 
-CREATE PROCEDURE sp_AddEmp        
+CREATE OR ALTER PROCEDURE sp_AddEmp        
 (                   
     @ENAME VARCHAR(10),          
     @JOB VARCHAR(9),          
@@ -81,7 +81,7 @@ BEGIN
     VALUES ((SELECT MAX(EMPNO)+1 FROM EMP),@ENAME,@JOB, @MGR,@HIREDATE, @SAL, @COMM, @DEPTNO)
 END  
 
-CREATE PROCEDURE sp_DeleteEmp           
+CREATE OR ALTER PROCEDURE sp_DeleteEmp           
 (            
    @empNo decimal            
 )            
@@ -90,12 +90,12 @@ BEGIN
    DELETE FROM EMP WHERE EMPNO= @empNo            
 END  
 
-CREATE PROCEDURE [dbo].[sp_GetEmps]
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetEmps]
 AS
     SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP 
 GO
 
-CREATE PROCEDURE [dbo].[sp_GetEmpsByDept] @deptNo decimal
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetEmpsByDept] @deptNo decimal
 AS
       WITH cteReports (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO ) AS
 (
@@ -115,13 +115,16 @@ FROM cteReports
 	WHERE DEPTNO = @deptNo
 GO
 
-CREATE PROCEDURE [dbo].[sp_GetEmpById] @empNo decimal           
+
+
+
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetEmpById] @empNo decimal           
 AS             
     SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP
 	WHERE EMPNO = @empNo
 GO
 
-CREATE PROCEDURE [dbo].[sp_Subordinates] @MgrNo decimal null
+CREATE OR ALTER PROCEDURE [dbo].[sp_Subordinates] @MgrNo decimal null
 AS
    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO, SALGRADE.GRADE FROM EMP
     LEFT JOIN SALGRADE
@@ -129,7 +132,7 @@ ON SAL >= SALGRADE.LOSAL and SAL <= SALGRADE.HISAL
    WHERE MGR = @MgrNo
 GO
 
-CREATE PROCEDURE [dbo].[sp_President]
+CREATE OR ALTER PROCEDURE [dbo].[sp_President]
 AS
    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO, SALGRADE.GRADE FROM EMP
    LEFT JOIN SALGRADE
@@ -137,7 +140,7 @@ ON SAL >= SALGRADE.LOSAL and SAL <= SALGRADE.HISAL
    WHERE MGR IS NULL
 GO
 
-CREATE PROCEDURE [dbo].[sp_Hierarchy]
+CREATE OR ALTER PROCEDURE [dbo].[sp_Hierarchy]
 AS
   WITH cteReports (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO ) AS
 (
@@ -156,7 +159,7 @@ SELECT
 FROM cteReports
 GO
 
-CREATE PROCEDURE sp_UpdateEmp            
+CREATE OR ALTER PROCEDURE sp_UpdateEmp            
 (            
     @EMPNO DECIMAL(30),           
     @ENAME VARCHAR(10),          
@@ -181,19 +184,19 @@ BEGIN
    WHERE EMPNO=@EMPNO            
 END
 
-CREATE PROCEDURE [dbo].[sp_GetDepts]           
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetDepts]           
 AS             
     SELECT DEPTNO, DNAME, LOC FROM DEPT
 GO
 
-CREATE PROCEDURE [dbo].[sp_GetDeptById] @deptNo decimal           
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetDeptById] @deptNo decimal           
 AS             
     SELECT DEPTNO, DNAME, LOC FROM DEPT
 	WHERE DEPTNO = @deptNo
 GO
 
 
-CREATE PROCEDURE sp_AddDept        
+CREATE OR ALTER PROCEDURE sp_AddDept        
 (                     
     @DNAME VARCHAR(14),          
     @LOC VARCHAR(13)                    
@@ -204,7 +207,7 @@ BEGIN
     VALUES ((SELECT MAX(DEPTNO)+1 FROM DEPT),@DNAME,@LOC)
 END 
 
-CREATE PROCEDURE sp_DeleteDept           
+CREATE OR ALTER PROCEDURE sp_DeleteDept           
 (            
    @deptNo decimal           
 )            
@@ -213,7 +216,7 @@ BEGIN
    DELETE FROM DEPT WHERE DEPTNO= @deptNo         
 END 
 
-CREATE PROCEDURE sp_UpdateDept            
+CREATE OR ALTER PROCEDURE sp_UpdateDept            
 (                         
     @DEPTNO DECIMAL(30),
 	@DNAME VARCHAR(14),

@@ -14,21 +14,19 @@
 <body>
     <div class="parent">
         <div class="child"></div>
-        @*<div class="child">DEPTNO</div>
-            <div class="child">EMPNO</div>*@
-        <div class="child">ENAME</div>
+        <div class="child">NAME</div>
         <div class="child">COMM</div>
         <div class="child">HIREDATE</div>
         <div class="child">JOB</div>
-        <div class="child">SAL</div>
-        <div class="child">GRADE</div>
+        <div class="child">SALARY</div>
+        <div class="child">SALARY GRADE</div>
 
         <div class="parent">
             @foreach (var emp in Model)
             {
                 <div class="child">
                     @using (Ajax.BeginForm("GetSubordinates", new { MgrNo = emp.EmpNo }, new AjaxOptions
-                    { HttpMethod = "GET", OnSuccess = "AnimateVoteMessage('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
+                    { HttpMethod = "GET", OnSuccess = "ReplaceButton('" + emp.EmpNo + "')", UpdateTargetId = emp.EmpNo.ToString(), InsertionMode = InsertionMode.Replace }))
                     {
                         <input type="submit" value="+" class="btn" id="Replace-@emp.EmpNo" />}
                 </div>
@@ -48,8 +46,9 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+
     <script>
-        function AnimateVoteMessage(empNo) {
+        function ReplaceButton(empNo) {
             var btn = document.createElement('button');
             btn.setAttribute('class', "btn");
             btn.setAttribute('id', empNo);

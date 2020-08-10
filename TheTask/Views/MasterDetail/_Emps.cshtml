@@ -1,42 +1,46 @@
 ﻿@model IEnumerable<TheTask.Models.EmpPL>
 
-<div>
-    <h4 id="dName">EMPS:</h4>
-    <input type="text" id="searchEmp" placeholder="Search...">
-    <a class="btn" , href="@Url.Action("Create", "Emp")">CreateEmp</a>
-    <table border="1" id="Emp">
-        <tr>
-            <th>ENAME</th>
-            <th>COMM</th>
-            <th>HIREDATE</th>
-            <th>JOB</th>
-            <th>SAL</th>
-            <th></th>
-            <th></th>
-        </tr>
-        @foreach (var emps in Model)
-        {
-<tr id="@emps.EmpNo">
-    <td id="EName">@emps.EmpName</td>
-    <td>@emps.Comm</td>
-    <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
-    <td>@emps.Job</td>
-    <td>@emps.Sal</td>
-    <td>
-        <a href=" @Url.Action("Edit", "Emp", new { empNo = emps.EmpNo })">Edit</a>
-    </td>
-    <td>
-        @Ajax.ActionLink("Delete", "Delete", "Emp", new { empNo = emps.EmpNo }, new AjaxOptions
-        {
-            HttpMethod = "DELETE",
-            UpdateTargetId = emps.EmpNo.ToString(),
-            Confirm = $"\n Confirm deletion\n\n Name = {emps.EmpName}\n Job = {emps.Job}",
-            InsertionMode = InsertionMode.Replace
-        })
-    </td>
-</tr>}
-    </table>
-</div>
+
+    <body>
+        <div>
+            <h4 id="dName">EMPS:</h4>
+            <input type="text" id="searchEmp" placeholder="Search...">
+            <a class="btn" , href="@Url.Action("Create", "Emp")">CreateEmp</a>
+            <table border="1" id="Emp">
+                <tr>
+                    <th>NAME</th>
+                    <th>COMM</th>
+                    <th>HIREDATE</th>
+                    <th>JOB</th>
+                    <th>SALARY</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var emps in Model)
+                {
+    <tr id="@emps.EmpNo">
+        <td id="EName">@emps.EmpName</td>
+        <td>@emps.Comm</td>
+        <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
+        <td>@emps.Job</td>
+        <td>@emps.Sal</td>
+        <td>
+            <a href=" @Url.Action("Edit", "Emp", new { empNo = emps.EmpNo })">Edit</a>
+        </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Emp", new { empNo = emps.EmpNo }, new AjaxOptions
+            {
+                HttpMethod = "DELETE",
+                UpdateTargetId = emps.EmpNo.ToString(),
+                Confirm = $"\n Confirm deletion\n\n Name = {emps.EmpName}\n Job = {emps.Job}",
+                InsertionMode = InsertionMode.Replace
+            })
+        </td>
+    </tr>}
+            </table>
+        </div>
+    </body>
+
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")

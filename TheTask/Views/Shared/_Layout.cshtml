@@ -13,18 +13,16 @@
             <ul class="topmenu">
                 <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                 <li>
-                    <a class="submenu-link">MASTER-DETAIL</a>
-                    <ul class="submenu">
-                        <li><a href="@Url.Action("Create", "Emp")">CreateEmp</a></li>
-                        <li><a href="@Url.Action("MasterDet", "MasterDetail")">MS</a></li>
-                    </ul>
+                    <a href="@Url.Action("MasterDet", "MasterDetail")">DEPARTMENT & EMPLOYEES</a>
                 </li>
-                <li><a href="@Url.Action("Index", "Dept")">DEPARTMENTS</a></li>
                 <li>
-                    <a class="submenu-link">EMPS</a>
+                <a href="@Url.Action("Index", "Dept")">DEPARTMENTS</a>
+                </li>
+                <li>
+                    <a class="submenu-link">EMPLOYEES</a>
                     <ul class="submenu">
-                        <li><a href="@Url.Action("GetHierarchyAvgDept", "Emp")">EmpsAvgSal</a></li>
-                        <li><a href="@Url.Action("GetHierarchy", "Emp")">HierarchyEmps</a></li>
+                        <li><a href="@Url.Action("GetHierarchyAvgDept", "Emp")">SALARY REPORT</a></li>
+                        <li><a href="@Url.Action("GetHierarchy", "Emp")">HIERARCHICAL EMPLOYEE</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<TheTask.Models.DeptPL>
-
     <body>
         <div class="split left">
             <div>
@@ -8,8 +7,8 @@
             </div>
             <table border="1" width="100%" cellpadding="5" id="Dept">
                 <tr>
-                    <th>DNAME</th>
-                    <th>LOC</th>
+                    <th>DEPARTMENT</th>
+                    <th>LOCATION</th>
                     <th></th>
                 </tr>
                 @foreach (var depts in Model)
@@ -19,7 +18,7 @@
                         <td>@depts.Loc</td>
                         <td>
                             @Ajax.ActionLink("Detail", "DetailData", new { deptNo = depts.DeptNo }, new AjaxOptions
-                            { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "AnimateVoteMessage('" + depts.DeptName + "')", InsertionMode = InsertionMode.Replace })
+                            { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "ReplaceSplitRight('" + depts.DeptName + "')", InsertionMode = InsertionMode.Replace })
                         </td>
                     </tr>
                 }
@@ -56,8 +55,9 @@
 
 
     <script>
-        function AnimateVoteMessage(deptName) {
-            $("#dName").text('Department Selected: ' + deptName +'');
+        function ReplaceSplitRight(deptName) {
+            $("#dName").text('Department Selected: ' + deptName + '');
+
             $("#searchEmp").on("keyup", function () {
                 var value = $(this).val();
 
