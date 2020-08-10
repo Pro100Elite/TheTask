@@ -5,7 +5,8 @@
         <div>
             <h4 id="dName">EMPS:</h4>
             <input type="text" id="searchEmp" placeholder="Search...">
-            <a class="btn" , href="@Url.Action("Create", "Emp")">CreateEmp</a>
+            @Ajax.ActionLink("Create", "Create", "Emp", new AjaxOptions
+            { HttpMethod = "GET", UpdateTargetId = "rp", InsertionMode = InsertionMode.Replace })
             <table border="1" id="Emp">
                 <tr>
                     <th>NAME</th>
@@ -18,25 +19,28 @@
                 </tr>
                 @foreach (var emps in Model)
                 {
-    <tr id="@emps.EmpNo">
-        <td id="EName">@emps.EmpName</td>
-        <td>@emps.Comm</td>
-        <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
-        <td>@emps.Job</td>
-        <td>@emps.Sal</td>
-        <td>
-            <a href=" @Url.Action("Edit", "Emp", new { empNo = emps.EmpNo })">Edit</a>
-        </td>
-        <td>
-            @Ajax.ActionLink("Delete", "Delete", "Emp", new { empNo = emps.EmpNo }, new AjaxOptions
-            {
-                HttpMethod = "DELETE",
-                UpdateTargetId = emps.EmpNo.ToString(),
-                Confirm = $"\n Confirm deletion\n\n Name = {emps.EmpName}\n Job = {emps.Job}",
-                InsertionMode = InsertionMode.Replace
-            })
-        </td>
-    </tr>}
+        <tr id="@emps.EmpNo">
+            <td id="EName">@emps.EmpName</td>
+            <td>@emps.Comm</td>
+            <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
+            <td>@emps.Job</td>
+            <td>@emps.Sal</td>
+            <td>
+                @*<a href=" @Url.Action("Edit", "Emp", new { empNo = emps.EmpNo })">Edit</a>*@
+                @Ajax.ActionLink("Edit", "Edit", "Emp", new { empNo = emps.EmpNo }, new AjaxOptions
+                { HttpMethod = "GET", UpdateTargetId = "rp", InsertionMode = InsertionMode.Replace })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Emp", new { empNo = emps.EmpNo }, new AjaxOptions
+                {
+                    HttpMethod = "DELETE",
+                    UpdateTargetId = emps.EmpNo.ToString(),
+                    Confirm = $"\n Confirm deletion\n\n Name = {emps.EmpName}\n Job = {emps.Job}",
+                    InsertionMode = InsertionMode.Replace
+                })
+            </td>
+        </tr>
+}
             </table>
         </div>
     </body>

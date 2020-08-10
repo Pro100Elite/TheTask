@@ -69,7 +69,7 @@ namespace TheTask.Controllers
             var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
             var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job };
 
-            return View(model);
+            return PartialView("_Create", model);
         }
 
         [HttpPost]
@@ -120,7 +120,7 @@ namespace TheTask.Controllers
             {
                 _service.Create(model);
 
-                return RedirectToAction("MasterDet", "MasterDetail");
+                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = empPL.DeptNo });
             }
 
             var depts = _deptService.GetAll();
@@ -135,7 +135,7 @@ namespace TheTask.Controllers
             empPL.ListJob = Job;
             empPL.ListMgr = Mgr;
 
-            return View(empPL);
+            return PartialView("_Create", empPL);
         }
 
         public ActionResult Edit(decimal empNo)
@@ -153,7 +153,7 @@ namespace TheTask.Controllers
             model.ListJob = Job;
             model.ListMgr = Mgr;
 
-            return View(model);
+            return PartialView("_Edit", model);
         }
 
         [HttpPost]
@@ -202,7 +202,7 @@ namespace TheTask.Controllers
             if (ModelState.IsValid)
             {
                 _service.Edit(model);
-                return RedirectToAction("MasterDet", "MasterDetail");
+                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = empPL.DeptNo });
             }
 
             var depts = _deptService.GetAll();
@@ -217,7 +217,7 @@ namespace TheTask.Controllers
             empPL.ListJob = Job;
             empPL.ListMgr = Mgr;
 
-            return View(empPL);
+            return PartialView("_Edit", empPL);
         }
 
         [HttpDelete]

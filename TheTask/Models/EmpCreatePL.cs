@@ -22,7 +22,7 @@ namespace TheTask.Models
         [Range(700, 9999, ErrorMessage = "Min Sal = 700, Max Sal = 9999")]
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
-        public decimal? DeptNo { get; set; }
+        public decimal DeptNo { get; set; }
 
         public IEnumerable<SelectListItem> ListDept { get; set; }
         public IEnumerable<SelectListItem> ListMgr { get; set; }

@@ -200,6 +200,8 @@
     <Content Include="Views\MasterDetail\MasterDet.cshtml" />
     <Content Include="Views\MasterDetail\_Emps.cshtml" />
     <Content Include="Views\Emp\Edit.cshtml" />
+    <Content Include="Views\Emp\_Edit.cshtml" />
+    <Content Include="Views\Emp\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
