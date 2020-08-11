@@ -49,7 +49,7 @@ namespace TheTask.Controllers
 
             if (string.IsNullOrEmpty(deptPL.DeptName))
             {
-                ModelState.AddModelError("DeptName", "ne corect DeptName");
+                ModelState.AddModelError("DeptName", "Required to fill");
             }
             else
             {
@@ -57,12 +57,12 @@ namespace TheTask.Controllers
 
                 if (data.Count() != 0)
                 {
-                    ModelState.AddModelError("DeptName", "ne corect DeptName2");
+                    ModelState.AddModelError("DeptName", "This Department name is already taken");
                 }
             }
             if (string.IsNullOrEmpty(deptPL.Loc))
             {
-                ModelState.AddModelError("Loc", "ne corect Loc");
+                ModelState.AddModelError("Loc", "Required to fill");
             }
 
             if (ModelState.IsValid)

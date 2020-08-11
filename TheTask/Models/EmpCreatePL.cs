@@ -11,15 +11,15 @@ namespace TheTask.Models
     public class EmpCreatePL
     {
         public decimal EmpNo { get; set; }
-        [Required(ErrorMessage = "Input ENAME")]
+        [Required(ErrorMessage = "Required to fill")]
         public string EmpName { get; set; }
         public string Job { get; set; }
         public decimal? Mgr { get; set; }
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Select Date")]
         public DateTime? HireDate { get; set; }
-        [Required(ErrorMessage = "Input SAL")]
-        [Range(700, 9999, ErrorMessage = "Min Sal = 700, Max Sal = 9999")]
+        [Required(ErrorMessage = "Required to fill")]
+        [Range(700, 9999, ErrorMessage = "Min value Sal = 700, Max value Sal = 9999")]
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
         public decimal DeptNo { get; set; }

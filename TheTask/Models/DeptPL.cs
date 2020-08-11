@@ -10,9 +10,9 @@ namespace TheTask.Models
     public class DeptPL
     {
         public decimal DeptNo { get; set; }
-        [Required(ErrorMessage = "Input Name")]
+        [Required(ErrorMessage = "Required to fill")]
         public string DeptName { get; set; }
-        [Required(ErrorMessage = "Input Loc")]
+        [Required(ErrorMessage = "Required to fill")]
         public string Loc { get; set; }
     }
 }

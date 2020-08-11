@@ -79,7 +79,7 @@ namespace TheTask.Controllers
 
             if (string.IsNullOrEmpty(empPL.EmpName))
             {
-                ModelState.AddModelError("EmpName", "ne corect Name");
+                ModelState.AddModelError("EmpName", "Required to fill");
             }
             else
             {
@@ -88,7 +88,7 @@ namespace TheTask.Controllers
 
                 if (data2.Count() != 0)
                 {
-                    ModelState.AddModelError("EmpName", "ne corect Name2");
+                    ModelState.AddModelError("EmpName", "This name is already taken");
                 }
             }
 
@@ -104,16 +104,16 @@ namespace TheTask.Controllers
 
             if (string.IsNullOrEmpty(empPL.Sal.ToString()))
             {
-                ModelState.AddModelError("Sal", "ne corect Sal");
+                ModelState.AddModelError("Sal", "Required to fill");
             }
             else if (empPL.Sal < 700 || empPL.Sal > 9999)
             {
-                ModelState.AddModelError("Sal", "ne corect Sal2");
+                ModelState.AddModelError("Sal", "Min value Sal = 700, Max value Sal = 9999");
             }
 
             if (string.IsNullOrEmpty(empPL.DeptNo.ToString()))
             {
-                ModelState.AddModelError("DeptNo", "Select Dept");
+                ModelState.AddModelError("DeptNo", "Select Department");
             }
 
             if (ModelState.IsValid)
@@ -163,7 +163,7 @@ namespace TheTask.Controllers
 
             if (string.IsNullOrEmpty(empPL.EmpName))
             {
-                ModelState.AddModelError("EmpName", "ne corect Name");
+                ModelState.AddModelError("EmpName", "Required to fill");
             }
             else
             {
@@ -172,7 +172,7 @@ namespace TheTask.Controllers
 
                 if (data2.Count() != 0 & targetEmp.EmpName != empPL.EmpName)
                 {
-                    ModelState.AddModelError("EmpName", "ne corect Name2");
+                    ModelState.AddModelError("EmpName", "This name is already taken");
                 }
             }
 
@@ -188,15 +188,15 @@ namespace TheTask.Controllers
 
             if (string.IsNullOrEmpty(empPL.Sal.ToString()))
             {
-                ModelState.AddModelError("Sal", "ne corect Sal");
+                ModelState.AddModelError("Sal", "Required to fill");
             } else if (empPL.Sal < 700 || empPL.Sal > 9999)
             {
-                ModelState.AddModelError("Sal", "ne corect Sal2");
+                ModelState.AddModelError("Sal", "Min value Sal = 700, Max value Sal = 9999");
             }
 
             if (string.IsNullOrEmpty(empPL.DeptNo.ToString()))
             {
-                ModelState.AddModelError("DeptNo", "Select Dept");
+                ModelState.AddModelError("DeptNo", "Select Department");
             }
 
             if (ModelState.IsValid)
