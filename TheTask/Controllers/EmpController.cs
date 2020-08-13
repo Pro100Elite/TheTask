@@ -72,7 +72,7 @@ namespace TheTask.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(EmpCreatePL empPL)
+        public ActionResult Create(EmpCreatePL empPL, decimal deptNo)
         {
             var model = _mapper.Map<EmpBL>(empPL);
 
@@ -118,8 +118,7 @@ namespace TheTask.Controllers
             if (ModelState.IsValid)
             {
                 _service.Create(model);
-                var dept = _deptService.GetDept(empPL.DeptNo);
-                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = dept.DeptNo, deptName = dept.DeptName});
+                return RedirectToAction("DetailData", "MasterDetail", new { deptNo});
             }
 
             var depts = _deptService.GetAll();

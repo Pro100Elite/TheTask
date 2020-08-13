@@ -34,7 +34,7 @@ namespace TheTask.Controllers
         {
             var data = _empService.GetByDept(deptNo);
             var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
-
+            ViewBag.d = deptNo;
             return PartialView("_Emps", emps);
         }
     }

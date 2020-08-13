@@ -5,7 +5,7 @@
         @Scripts.Render("~/bundles/jqueryval")
 
 
-        @using ((Ajax.BeginForm("Create", "EMP", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "rep", OnSuccess = "ReplaceSplitRight()", InsertionMode = InsertionMode.ReplaceWith })))
+        @using ((Ajax.BeginForm("Create", "EMP", new { depntNo = ViewBag.d }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "rep", OnSuccess = "ReplaceSplitRight()", InsertionMode = InsertionMode.ReplaceWith })))
         {
             @Html.AntiForgeryToken()
 

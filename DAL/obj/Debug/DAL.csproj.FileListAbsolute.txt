@@ -9,3 +9,9 @@ D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.dll
 D:\Projects\TheTask\TheTask\DAL\obj\Debug\DAL.pdb
+C:\project2\TheTask\DAL\bin\Debug\DAL.dll
+C:\project2\TheTask\DAL\bin\Debug\DAL.pdb
+C:\project2\TheTask\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\project2\TheTask\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\project2\TheTask\DAL\obj\Debug\DAL.dll
+C:\project2\TheTask\DAL\obj\Debug\DAL.pdb
