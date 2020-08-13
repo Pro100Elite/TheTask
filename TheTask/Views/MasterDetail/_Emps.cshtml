@@ -5,8 +5,8 @@
         <div>
             <h4 id="dName">EMPS:</h4>
             <input type="text" id="searchEmp" placeholder="Search...">
-            @Ajax.ActionLink("Create", "Create", "Emp", new AjaxOptions
-            { HttpMethod = "GET", UpdateTargetId = "rp", InsertionMode = InsertionMode.Replace })
+            @Ajax.ActionLink("Create", "Create", "Emp", new { deptNo = Model.First().DeptNo}, new AjaxOptions
+            { HttpMethod = "GET", UpdateTargetId = "rp", InsertionMode = InsertionMode.Replace });
             <table border="1" id="Emp">
                 <tr>
                     <th>NAME</th>
@@ -26,7 +26,6 @@
             <td>@emps.Job</td>
             <td>@emps.Sal</td>
             <td>
-                @*<a href=" @Url.Action("Edit", "Emp", new { empNo = emps.EmpNo })">Edit</a>*@
                 @Ajax.ActionLink("Edit", "Edit", "Emp", new { empNo = emps.EmpNo }, new AjaxOptions
                 { HttpMethod = "GET", UpdateTargetId = "rp", InsertionMode = InsertionMode.Replace })
             </td>

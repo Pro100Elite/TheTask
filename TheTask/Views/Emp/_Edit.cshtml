@@ -5,7 +5,7 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
 
-        @using ((Ajax.BeginForm("Edit", "EMP", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "rep", OnSuccess = "ReplaceSplitRight('" + Model.ListDept.FirstOrDefault(x => x.Selected) + "')", InsertionMode = InsertionMode.ReplaceWith})))
+        @using ((Ajax.BeginForm("Edit", "EMP", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "rep", OnSuccess = "ReplaceSplitRight()", InsertionMode = InsertionMode.ReplaceWith})))
         {
                 @Html.AntiForgeryToken()
 

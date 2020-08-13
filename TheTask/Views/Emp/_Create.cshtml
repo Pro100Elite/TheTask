@@ -5,7 +5,7 @@
         @Scripts.Render("~/bundles/jqueryval")
 
 
-        @using ((Ajax.BeginForm("Create", "EMP", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "rep", InsertionMode = InsertionMode.ReplaceWith })))
+        @using ((Ajax.BeginForm("Create", "EMP", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "rep", OnSuccess = "ReplaceSplitRight()", InsertionMode = InsertionMode.ReplaceWith })))
         {
             @Html.AntiForgeryToken()
 
@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" , id="Mgr">
+                <div class="form-group">
                     @Html.LabelFor(model => model.Mgr, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.Mgr, Model.ListMgr)
@@ -63,7 +63,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.DeptNo, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.DeptNo, Model.ListDept)
+                        @Html.DropDownListFor(model => model.DeptNo, Model.ListDept) 
                     </div>
                 </div>
 

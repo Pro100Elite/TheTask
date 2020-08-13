@@ -59,7 +59,7 @@ namespace TheTask.Controllers
         }
 
 
-        public ActionResult Create()
+        public ActionResult Create(decimal deptNo)
         {
             var depts = _deptService.GetAll();
             var mgr = _service.GetAll();
@@ -67,8 +67,7 @@ namespace TheTask.Controllers
             var Depts = new SelectList(depts, "DeptNo", "DeptName");
             var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
             var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
-            var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job };
-
+            var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job, DeptNo = deptNo};
             return PartialView("_Create", model);
         }
 
@@ -119,8 +118,8 @@ namespace TheTask.Controllers
             if (ModelState.IsValid)
             {
                 _service.Create(model);
-
-                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = empPL.DeptNo });
+                var dept = _deptService.GetDept(empPL.DeptNo);
+                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = dept.DeptNo, deptName = dept.DeptName});
             }
 
             var depts = _deptService.GetAll();
@@ -199,10 +198,13 @@ namespace TheTask.Controllers
                 ModelState.AddModelError("DeptNo", "Select Department");
             }
 
+
+
             if (ModelState.IsValid)
             {
+                var dept = _deptService.GetDept(empPL.DeptNo); 
                 _service.Edit(model);
-                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = empPL.DeptNo });
+                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = dept.DeptNo, deptName = dept.DeptName});
             }
 
             var depts = _deptService.GetAll();
