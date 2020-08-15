@@ -59,7 +59,7 @@ namespace TheTask.Controllers
         }
 
 
-        public ActionResult Create(decimal deptNo)
+        public ActionResult Create(decimal dept)
         {
             var depts = _deptService.GetAll();
             var mgr = _service.GetAll();
@@ -67,12 +67,12 @@ namespace TheTask.Controllers
             var Depts = new SelectList(depts, "DeptNo", "DeptName");
             var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
             var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
-            var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job, DeptNo = deptNo};
+            var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job, DeptNo = dept};
             return PartialView("_Create", model);
         }
 
         [HttpPost]
-        public ActionResult Create(EmpCreatePL empPL, decimal deptNo)
+        public ActionResult Create(EmpCreatePL empPL, decimal dept)
         {
             var model = _mapper.Map<EmpBL>(empPL);
 
@@ -118,7 +118,7 @@ namespace TheTask.Controllers
             if (ModelState.IsValid)
             {
                 _service.Create(model);
-                return RedirectToAction("DetailData", "MasterDetail", new { deptNo});
+                return RedirectToAction("DetailData", "MasterDetail", new {dept});
             }
 
             var depts = _deptService.GetAll();
@@ -136,7 +136,7 @@ namespace TheTask.Controllers
             return PartialView("_Create", empPL);
         }
 
-        public ActionResult Edit(decimal empNo)
+        public ActionResult Edit(decimal empNo, decimal dept)
         {
             var depts = _deptService.GetAll();
             var mgr = _service.GetAll();
@@ -155,7 +155,7 @@ namespace TheTask.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(EmpCreatePL empPL)
+        public ActionResult Edit(EmpCreatePL empPL, decimal dept)
         {
             var model = _mapper.Map<EmpBL>(empPL);
 
@@ -201,9 +201,9 @@ namespace TheTask.Controllers
 
             if (ModelState.IsValid)
             {
-                var dept = _deptService.GetDept(empPL.DeptNo); 
+                //var deptById = _deptService.GetDept(empPL.DeptNo); 
                 _service.Edit(model);
-                return RedirectToAction("DetailData", "MasterDetail", new { deptNo = dept.DeptNo, deptName = dept.DeptName});
+                return RedirectToAction("DetailData", "MasterDetail", new { dept });
             }
 
             var depts = _deptService.GetAll();

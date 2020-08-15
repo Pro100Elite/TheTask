@@ -17,7 +17,7 @@
                     <td id="DeptName">@depts.DeptName</td>
                     <td>@depts.Loc</td>
                     <td>
-                        @Ajax.ActionLink("Detail", "DetailData", new { deptNo = depts.DeptNo }, new AjaxOptions
+                        @Ajax.ActionLink("Detail", "DetailData", new { dept = depts.DeptNo }, new AjaxOptions
                         { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "ReplaceSplitRight('" + depts.DeptName + "')", InsertionMode = InsertionMode.Replace })
                     </td>
                 </tr>

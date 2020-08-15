@@ -30,11 +30,11 @@ namespace TheTask.Controllers
             return View(depts);
         }
 
-        public ActionResult DetailData(decimal deptNo)
+        public ActionResult DetailData(decimal dept)
         {
-            var data = _empService.GetByDept(deptNo);
+            var data = _empService.GetByDept(dept);
             var emps = _mapper.Map<IEnumerable<EmpPL>>(data);
-            ViewBag.d = deptNo;
+            ViewBag.d = dept;
             return PartialView("_Emps", emps);
         }
     }

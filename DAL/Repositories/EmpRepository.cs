@@ -262,7 +262,16 @@ namespace DAL.Repositories
                 cmd.Parameters.AddWithValue("@EMPNO", emp.EmpNo);
                 cmd.Parameters.AddWithValue("@ENAME", emp.EmpName);
                 cmd.Parameters.AddWithValue("@JOB", emp.Job);
-                cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
+
+                if (emp.Mgr != null)
+                {
+                    cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@MGR", DBNull.Value);
+                }
+                
                 cmd.Parameters.AddWithValue("@HIREDATE", emp.HireDate);
                 cmd.Parameters.AddWithValue("@SAL", emp.Sal);
 
