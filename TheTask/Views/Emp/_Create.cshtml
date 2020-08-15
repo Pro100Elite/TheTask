@@ -75,9 +75,10 @@
             </div>
         }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div>
+        @Ajax.ActionLink("Back to List", "DetailData", "MasterDetail", new { Model.DeptNo }, new AjaxOptions
+   { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "ReplaceSplitRight()", InsertionMode = InsertionMode.Replace })
+    </div>
     </div>
 
 

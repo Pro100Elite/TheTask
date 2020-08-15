@@ -1,32 +1,32 @@
 ﻿@model IEnumerable<TheTask.Models.DeptPL>
-    <body>
-        <div class="split left">
-            <div>
-                <h4>DEPARTMENTS:</h4>
-                <input type="text" id="searchDept" placeholder="Search...">
-            </div>
-            <table border="1" width="100%" cellpadding="5" id="Dept">
+<body>
+    <div class="split left">
+        <div>
+            <h4>DEPARTMENTS:</h4>
+            <input type="text" id="searchDept" placeholder="Search...">
+        </div>
+        <table border="1" width="100%" cellpadding="5" id="Dept">
+            <tr>
+                <th>DEPARTMENT</th>
+                <th>LOCATION</th>
+                <th></th>
+            </tr>
+            @foreach (var depts in Model)
+            {
                 <tr>
-                    <th>DEPARTMENT</th>
-                    <th>LOCATION</th>
-                    <th></th>
+                    <td id="DeptName">@depts.DeptName</td>
+                    <td>@depts.Loc</td>
+                    <td>
+                        @Ajax.ActionLink("Detail", "DetailData", new { deptNo = depts.DeptNo }, new AjaxOptions
+                        { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "ReplaceSplitRight('" + depts.DeptName + "')", InsertionMode = InsertionMode.Replace })
+                    </td>
                 </tr>
-                @foreach (var depts in Model)
-                {
-                    <tr>
-                        <td id="DeptName">@depts.DeptName</td>
-                        <td>@depts.Loc</td>
-                        <td>
-                            @Ajax.ActionLink("Detail", "DetailData", new { deptNo = depts.DeptNo}, new AjaxOptions
-                            { HttpMethod = "GET", UpdateTargetId = "rp", OnSuccess = "ReplaceSplitRight('" + depts.DeptName + "')", InsertionMode = InsertionMode.Replace })
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-        <div class="split right" id="rp">
-        </div>
-    </body>
+            }
+        </table>
+    </div>
+    <div class="split right" id="rp">
+    </div>
+</body>
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
@@ -62,7 +62,7 @@
             if (deptName != undefined) {
                 dept = deptName;
             }
-            $("#dName").text('Department Selected: ' + dept + '');  
+            $("#dName").text('Department Selected: ' + dept + '');
 
             $("#searchEmp").on("keyup", function () {
                 var value = $(this).val();
@@ -85,4 +85,6 @@
             });
         }
     </script>
+
+
 }
