@@ -136,15 +136,15 @@ namespace TheTask.Controllers
             return PartialView("_Create", empPL);
         }
 
-        public ActionResult Edit(decimal empNo, decimal dept)
+        public ActionResult Edit(decimal empNo)
         {
             var depts = _deptService.GetAll();
-            var mgr = _service.GetAll();
+            var mgr = _service.GetAll().Where(m => m.EmpNo != empNo);
 
             var Depts = new SelectList(depts, "DeptNo", "DeptName");
             var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
             var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
-            var data = _service.GetEmp(empNo);
+            var data = _service.GetEmp(empNo);          
             var model = _mapper.Map<EmpCreatePL>(data);
 
             model.ListDept = Depts;
@@ -201,7 +201,6 @@ namespace TheTask.Controllers
 
             if (ModelState.IsValid)
             {
-                //var deptById = _deptService.GetDept(empPL.DeptNo); 
                 _service.Edit(model);
                 return RedirectToAction("DetailData", "MasterDetail", new { dept });
             }
