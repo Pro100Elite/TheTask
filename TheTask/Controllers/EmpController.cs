@@ -36,8 +36,8 @@ namespace TheTask.Controllers
 
         public ActionResult GetHierarchyAvgDept()
         {
-            var data = _service.GetHierarchy();
-            var emps = _mapper.Map<IEnumerable<EmpPL>>(data).GroupBy(x => x.DeptNo);
+            var data = _service.GetAllPlusDName();
+            var emps = _mapper.Map<IEnumerable<EmpPlusDNamePL>>(data).GroupBy(x => x.DeptNo).OrderBy(o => o.Key);
 
             return View(emps);
         }
@@ -68,6 +68,7 @@ namespace TheTask.Controllers
             var Mgr = new SelectList(mgr, "EmpNo", "EmpName");
             var Job = new SelectList(mgr.GroupBy(x => x.Job).Select(g => g.First()), "Job", "Job");
             var model = new EmpCreatePL { ListDept = Depts, ListMgr = Mgr, ListJob = Job, DeptNo = dept};
+            model.Job = "PRESIDENT";
             return PartialView("_Create", model);
         }
 

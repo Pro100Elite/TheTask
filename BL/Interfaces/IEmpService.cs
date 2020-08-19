@@ -11,6 +11,7 @@ namespace BL.Interfaces
     {
         EmpBL GetEmp(decimal? empNo);
         IEnumerable<EmpBL> GetAll();
+        IEnumerable<EmpPlusDNameBL> GetAllPlusDName();
         IEnumerable<EmpBL> GetByDept(decimal deptNo);
         IEnumerable<EmpBL> GetHierarchy();
         IEnumerable<EmpPlusSalGradeBL> GetEmpsHierarchy(decimal? MgrNo);

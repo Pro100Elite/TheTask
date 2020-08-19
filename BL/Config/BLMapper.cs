@@ -16,6 +16,7 @@ namespace BL.Config
             CreateMap<Dept, DeptBL>().ReverseMap();
             CreateMap<Emp, EmpBL>().ReverseMap();
             CreateMap<EmpPlusSalGrade, EmpPlusSalGradeBL>().ReverseMap();
+            CreateMap<EmpPlusDName, EmpPlusDNameBL>().ReverseMap();
         }
     }
 }

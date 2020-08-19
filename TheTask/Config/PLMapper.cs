@@ -16,6 +16,7 @@ namespace TheTask.Config
             CreateMap<EmpBL, EmpPL>().ReverseMap();
             CreateMap<EmpBL, EmpCreatePL>().ReverseMap();
             CreateMap<EmpPlusSalGradeBL, EmpPlusSalGradePL>().ReverseMap();
+            CreateMap<EmpPlusDNameBL, EmpPlusDNamePL>().ReverseMap();
         }
     }
 }

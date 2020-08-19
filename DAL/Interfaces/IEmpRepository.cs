@@ -11,7 +11,7 @@ namespace DAL.Interfaces
     {
         Emp GetEmp(decimal? empNo);
         IEnumerable<Emp> GetAll();
-
+        IEnumerable<EmpPlusDName> GetAllPlusDName();
         IEnumerable<Emp> GetByDept(decimal deptNo);
         IEnumerable<Emp> GetHierarchy();
         IEnumerable<EmpPlusSalGrade> GetEmpsHierarchy(decimal? MgrNo);

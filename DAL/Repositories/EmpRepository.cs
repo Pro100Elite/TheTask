@@ -52,6 +52,45 @@ namespace DAL.Repositories
             return emps;
         }
 
+
+        public IEnumerable<EmpPlusDName> GetAllPlusDName()
+        {
+            var emps = new List<EmpPlusDName>();
+
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                connection.Open();
+
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = "sp_GetEmpsPlusDept";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+
+                {
+                    while (reader.Read())
+                    {
+                        var emp = new EmpPlusDName
+                        {
+                            EmpNo = (decimal)reader["EMPNO"],
+                            EmpName = (string)reader["ENAME"],
+                            Job = reader["JOB"] as string,
+                            Mgr = reader["MGR"] as decimal?,
+                            HireDate = reader["HIREDATE"] as DateTime?,
+                            Sal = reader["SAL"] as decimal?,
+                            Comm = reader["COMM"] as decimal?,
+                            DeptNo = reader["DEPTNO"] as decimal?,
+                            DeptName = reader["DNAME"] as string
+                        };
+                        emps.Add(emp);
+                    }
+                }
+            }
+
+            return emps;
+        }
+
         public IEnumerable<Emp> GetByDept(decimal deptNo)
         {
             var emps = new List<Emp>();
@@ -217,7 +256,16 @@ namespace DAL.Repositories
           
                 cmd.Parameters.AddWithValue("@ENAME", emp.EmpName);
                 cmd.Parameters.AddWithValue("@JOB", emp.Job);
-                cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
+
+                if (emp.Mgr != null)
+                {
+                    cmd.Parameters.AddWithValue("@MGR", emp.Mgr);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@MGR", DBNull.Value);
+                }
+
                 cmd.Parameters.AddWithValue("@HIREDATE", emp.HireDate);
                 cmd.Parameters.AddWithValue("@SAL", emp.Sal);
 

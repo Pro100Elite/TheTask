@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace DAL.Models
+namespace TheTask.Models
 {
-    public class Emp
+    public class EmpPlusDNamePL
     {
         public decimal EmpNo { get; set; }
         public string EmpName { get; set; }
@@ -18,5 +15,6 @@ namespace DAL.Models
         public decimal? Sal { get; set; }
         public decimal? Comm { get; set; }
         public decimal? DeptNo { get; set; }
+        public string DeptName { get; set; }
     }
 }

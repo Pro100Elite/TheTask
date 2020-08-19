@@ -16,7 +16,7 @@ namespace BL.Services
         private readonly IEmpRepository _repsitory;
         private readonly IMapper _mapper;
 
-        public EmpService(IEmpRepository repository, IMapper mapper)
+        public EmpService(IEmpRepository repository, IDeptRepository deptRepository, IMapper mapper)
         {
             _repsitory = repository;
             _mapper = mapper;
@@ -27,6 +27,13 @@ namespace BL.Services
             var data = _repsitory.GetAll();
             var emps = _mapper.Map<IEnumerable<EmpBL>>(data);
 
+            return emps;
+        }
+
+        public IEnumerable<EmpPlusDNameBL> GetAllPlusDName()
+        {
+            var data = _repsitory.GetAllPlusDName();
+            var emps = _mapper.Map<IEnumerable<EmpPlusDNameBL>>(data);
             return emps;
         }
 

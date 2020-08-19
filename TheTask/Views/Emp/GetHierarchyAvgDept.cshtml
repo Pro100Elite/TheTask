@@ -1,9 +1,9 @@
-﻿@model IEnumerable<IGrouping<decimal?, TheTask.Models.EmpPL>>
+﻿@model IEnumerable<IGrouping<decimal?, TheTask.Models.EmpPlusDNamePL>>
 
 <div>
     <table border="1" width="100%" cellpadding="5">
         <tr>
-            <th>DEPTNO</th>
+            <th>DEPARTMENT</th>
             <th>NAME</th>
             <th>COMM</th>
             <th>HIREDATE</th>
@@ -16,29 +16,26 @@
             decimal? avgSal = 0;
             foreach (var emps in dept)
             {
-    <tr>
-        <td>@emps.DeptNo</td>
-        <td>@emps.EmpName</td>
-        <td>@emps.Comm</td>
-        <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
-        <td>@emps.Job</td>
-        <td>@emps.Sal</td>
-    </tr>
-            avgSal += emps.Sal;
-                    }
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td>@string.Format("{0:0.00}", (avgSal / dept.Count()))</td>
-    </tr>
-    <tr>
-
-    </tr>
-    }
+<tr>
+    <td>@emps.DeptName</td>
+    <td>@emps.EmpName</td>
+    <td>@emps.Comm</td>
+    <td>@emps.HireDate.Value.Month/@emps.HireDate.Value.Day/@emps.HireDate.Value.Year</td>
+    <td>@emps.Job</td>
+    <td>@emps.Sal</td>
+</tr> avgSal += emps.Sal;
+                }
+<tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <td>@string.Format("{0:0.00}", (avgSal / dept.Count()))</td>
+</tr>
+                <tr>
+                </tr>}
     </table>
 </div>
 
