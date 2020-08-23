@@ -1,111 +1,33 @@
 ﻿@model IEnumerable<TheTask.Models.DeptPL>
-<body>
-    <div class="split left">
-        <div>
-            <h4>DEPARTMENTS:</h4>
-            <input type="text" id="searchDept" placeholder="Search...">
-        </div>
-        <table border="1" width="100%" cellpadding="5" id="Dept">
-            <tr>
-                <th>DEPARTMENT</th>
-                <th>LOCATION</th>
-                <th></th>
-            </tr>
-            @foreach (var depts in Model)
-            {
-                <tr data-id="@depts.DeptNo">
-                    <td id="DeptName">@depts.DeptName</td>
-                    <td>@depts.Loc</td>
-                    <td>
-                        @Ajax.ActionLink("Details", "DetailData", new { dept = depts.DeptNo }, new AjaxOptions
-                   {
-                       HttpMethod = "GET",
-                       UpdateTargetId = "rp",
-                       OnSuccess = "ReplaceSplitRight('" + depts.DeptName + "')",
-                       InsertionMode = InsertionMode.Replace
-                   })
-                    </td>
+    <body>
+        <div class="split left">
+            <div>
+                <h4>DEPARTMENTS:</h4>
+                <input type="text" id="searchDept" placeholder="Search...">
+            </div>
+            <table border="1" width="100%" cellpadding="5" id="Dept">
+                <tr>
+                    <th>DEPARTMENT</th>
+                    <th>LOCATION</th>
                 </tr>
-            }
-        </table>
-    </div>
-    <div class="split right" id="rp">
-    </div>
-</body>
+                @foreach (var depts in Model)
+                {
+    <tr data-id="@depts.DeptNo">
+        <td id="DeptName">@depts.DeptName</td>
+        <td>@depts.Loc</td>
+    </tr>
+       }
+            </table>
+        </div>
+        <div class="split right">
+            <h4 id="dName"></h4>
+            <div id="rp">
+
+            </div>
+        </div>
+    </body>
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
-
-    <script>
-        $("#searchDept").on("keyup", function () {
-            var value = $(this).val();
-
-            $("#Dept tr").each(function (index) {
-                if (index !== 0) {
-
-                    $row = $(this);
-
-                    var id = $row.find("#DeptName").text();
-
-                    if (id.indexOf(value) !== 0) {
-                        $row.hide();
-                    }
-                    else {
-                        $row.show();
-                    }
-                }
-            });
-        });
-    </script>
-
-
-    <script>
-        var dept = "";
-
-        function ReplaceSplitRight(deptName) {
-
-            if (deptName != undefined) {
-                dept = deptName;
-            }
-            $("#dName").text('Department Selected: ' + dept + '');
-
-            $("#searchEmp").on("keyup", function () {
-                var value = $(this).val();
-
-                $("#Emp tr").each(function (index) {
-                    if (index !== 0) {
-
-                        $row = $(this);
-
-                        var id = $row.find("#EName").text();
-
-                        if (id.indexOf(value) !== 0) {
-                            $row.hide();
-                        }
-                        else {
-                            $row.show();
-                        }
-                    }
-                });
-            });
-        }
-    </script>
-
-    <script>
-        $("table").delegate("tr[data-id]", "click", function () {
-            alert($(this).attr("data-id"));
-            @*var deptNo = $(this).attr("data-id");
-            $.ajax({
-                url: '@Url.Action("DetailData", "MasterDetail")',
-                data: { "dept": deptNo },
-                type: 'GET',
-
-                success: function (data) {
-                    //$('#rp').replaceWith(data);
-                    $('#rp').html(data);
-                }*@
-        });
-    </script>
-
-
+    @Scripts.Render("~/Scripts/masterDetail.js")
 }

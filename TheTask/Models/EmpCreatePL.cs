@@ -12,6 +12,8 @@ namespace TheTask.Models
     {
         public decimal EmpNo { get; set; }
         [Required(ErrorMessage = "Required to fill")]
+        [MinLength(2, ErrorMessage = "MinLength = 2")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$", ErrorMessage = "A-z")]
         public string EmpName { get; set; }
         public string Job { get; set; }
         public decimal? Mgr { get; set; }

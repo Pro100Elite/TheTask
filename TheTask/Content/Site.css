@@ -208,3 +208,8 @@ ul {
     border-left-color: #273037;
     right: 0;
 }
+
+.active {
+    background-color: #273037;
+    color: #D5B45B;
+}

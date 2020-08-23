@@ -3,7 +3,6 @@
 
     <body>
         <div>
-            <h4 id="dName">EMPS:</h4>
             <input type="text" id="searchEmp" placeholder="Search...">
             @Ajax.ActionLink("Create", "Create", "Emp", new { dept = ViewBag.d}, new AjaxOptions
             { HttpMethod = "GET", UpdateTargetId = "rp", InsertionMode = InsertionMode.Replace })
